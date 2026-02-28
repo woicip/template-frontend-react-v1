@@ -1,0 +1,9 @@
+import type { PropsWithChildren } from "react";
+
+export default function App(props: PropsWithChildren){
+  return (
+    <div className="font-display">
+      {props.children}
+    </div>
+  )
+}

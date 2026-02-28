@@ -5,6 +5,9 @@ import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
   | `/`
+  | `/components`
+  | `/components/button-components`
+  | `/components/input-components`
 
 export type Params = {
   
