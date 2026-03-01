@@ -47,6 +47,53 @@ function Input({
     className: cn(className, icon && "pl-9", isTypePassword && "pr-11") 
   })
 
+  if(type === "checkbox"){
+    return (
+      <label htmlFor={id} className="h-fit select-none w-fit relative flex items-center justify-center gap-[2px]">
+        <input
+          id={id}
+          type={"checkbox"}
+          className="peer appearance-none w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 disabled:border-gray-350 disabled:bg-gray-200"
+          disabled={disabled || undefined}
+          {...props}
+        />
+        <svg
+          className="
+            absolute left-[2px] top-0
+            w-4 h-4 mt-1
+            hidden peer-disabled:text-text/40 peer-checked:block pointer-events-none"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          color="white"
+          stroke="currentColor"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        {label && <span className="ml-2 text-regular text-[#333333]">{label}</span>}
+      </label>
+    )
+  }
+
+  if(type === "radio"){
+    return (
+      <label htmlFor={id} className="select-none w-fit relative flex items-center justify-center gap-[2px]">
+        <input
+          id={id}
+          type={"radio"}
+          className="peer appearance-none w-5 h-5 bg-white border border-black/20 rounded-full disabled:border-gray-350 disabled:bg-gray-200"
+          disabled={disabled || undefined}
+          {...props}
+        />
+        <div className="absolute left-[4px] w-3 h-3 peer-checked:bg-primary rounded-full" />
+        {label && <span className="ml-2 text-regular text-[#333333]">{label}</span>}
+      </label>
+    )
+  }
+
   return (
     <label htmlFor={id} className="relative flex flex-col gap-[4px]">
       {label && <span className="mx-2.5 block text-small text-[#333333]">{label}</span>}

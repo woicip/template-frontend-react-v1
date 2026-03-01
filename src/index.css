@@ -4,7 +4,7 @@
 
 @layer component {
   .input {
-    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary shadow-primary hover:shadow-hover rounded-[12px] transition-all
+    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary shadow-primary hover:shadow-hover rounded-[12px] transition-all;
   }
 
   .input-disabled {
@@ -13,6 +13,52 @@
 
   .select-none {
     user-select: none;
+  }
+
+  .primary-gradient {
+    @apply bg-linear-to-b from-accent to-primary
+  }
+
+  .natural-gradient {
+    @apply bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA];
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-[4px]
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-black/10 rounded-[10px]
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-black/20 rounded-[10px]
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#555]
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .no-spinner::-webkit-inner-spin-button,
+  .no-spinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-spinner {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: none;
   }
 }
 
@@ -26,7 +72,7 @@
   --color-success: #00BA00;
   --color-ringprimary: #5D80EA;
   --color-ringsecondary: #D0E8FF;
-  
+  --color-border: #E5E5E5;
 
   --text-very-small: 11.1px;
   --text-small: 13.3px;
@@ -78,5 +124,30 @@ body {
   --text-h6: 18.2px;
   --text-regular: 16px;
   --text-small: 13.3px;
-  --text-very-small: 11.1px;
+  --text-very-small: 11.11px;
+  
+  --animate-popup: popup 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  --animate-popup-close: popupclose 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+
+  @keyframes popup {
+    0% {
+      scale: 0.6;
+      opacity: 0;
+    }
+    100% {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  @keyframes popupclose {
+    0% {
+      scale: 1;
+      opacity: 1;
+    }
+    100% {
+      scale: 0.6;
+      opacity: 0;
+    }
+  }
 }

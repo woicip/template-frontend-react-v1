@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button/button";
+import { DropdownButton, type DropdownOptionValue } from "@/components/ui/button/dropdown-button";
 import { PlusIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function ButtonComponents(){
+  const [value, setValue] = useState<DropdownOptionValue>()
+  
   return (
     <div className="w-auto grid grid-cols-2 gap-[20px]">
       <div className="w-full flex items-center gap-2.5">
@@ -36,6 +40,25 @@ export default function ButtonComponents(){
         <Button size={"small"}>Create</Button>
         <Button size={"small"} variant={"danger"}>Delete</Button>
         <Button size={"small"} disabled variant={"disabled"}>Create</Button>
+      </div>
+
+      <div>
+        <DropdownButton
+          className="w-[250px]"
+          options={[
+            { label: "This Week", value: "this_week" },
+            { label: "Last Week", value: "last_week" },
+            { label: "This Month", value: "this_month" },
+            { label: "Last Month", value: "last_month" },
+            { label: "This Year", value: "this_year" },
+            { label: "Last Year", value: "last_year" },
+          ]}
+          onChange={(option) => {
+            setValue(option);
+          }}
+        >
+          {value?.label || "Filter by date"}
+        </DropdownButton>
       </div>
 
     </div>
