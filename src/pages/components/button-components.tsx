@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button/button";
 import { DropdownButton, type DropdownOptionValue } from "@/components/ui/button/dropdown-button";
+import { Toggle } from "@/components/ui/button/toggle-button";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -60,7 +61,13 @@ export default function ButtonComponents(){
           {value?.label || "Filter by date"}
         </DropdownButton>
       </div>
-
+      
+      <div className="flex items-center gap-2.5">
+        <Toggle />
+        <Toggle checked />
+        <Toggle disabled />
+        <Toggle disabled checked />
+      </div>
     </div>
   )
 }

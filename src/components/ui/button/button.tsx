@@ -2,13 +2,13 @@ import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
-const button = cva("w-fit flex items-center justify-between", {
+const button = cva("w-fit flex items-center active:scale-[.95] transition-all", {
   variants: {
     variant: {
       primary: "bg-linear-to-b from-accent to-primary border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white",
       secondary: "bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-text",
       disabled: "bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA] border border-black/10 shadow-primary text-[#838383]",
-      danger: "bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-[#C51A1A] transition-all",
+      danger: "danger-gradient border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white transition-all",
     },
     size: {
       large: "text-regular py-[8px] px-[12px] rounded-[8px] gap-[6px]",
@@ -50,7 +50,7 @@ function Button({
     variant,
     disabled,
     size,
-    className: cn(className)
+    className: cn(className, dropdown ? "justify-between" : "justify-center")
   })
 
   return (

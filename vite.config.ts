@@ -7,6 +7,7 @@ import path from 'node:path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), generouted(), tailwindcss()],
+  assetsInclude: ['**/*.lottie'],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

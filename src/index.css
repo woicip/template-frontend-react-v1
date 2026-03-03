@@ -2,13 +2,25 @@
 @import "./fonts.css";
 @layer theme, base, components, utilities;
 
+@layer theme {
+  .toggleOn {
+    top: 3px;
+    right: 3px;
+  }
+
+  .toggleOff {
+    top: 3px;
+    left: 3px;
+  }
+}
+
 @layer component {
   .input {
-    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary shadow-primary hover:shadow-hover rounded-[12px] transition-all;
+    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
   }
 
   .input-disabled {
-    @apply border-[#E5E5E5] bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA] hover:shadow-primary;
+    @apply border border-[#E5E5E5] bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA] hover:shadow-primary rounded-[12px];
   }
 
   .select-none {
@@ -22,23 +34,47 @@
   .natural-gradient {
     @apply bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA];
   }
+
+  .danger-gradient {
+    @apply bg-linear-to-b from-[#F34235] to-[#AC1D12]
+  }
+
+  .toggle-btn > .toggle-btn-pupil {
+    transition: right 5s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  }
+
+  .accordion {
+    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary rounded-[12px] transition-all;
+  }
+
+  .accordion > button:first-child {
+    @apply border-t-0;
+  }
+
+  .accordion > div#panel:last-child {
+    @apply border-b-0;
+  }
+
+  .accordion > div#panel {
+    transition: max-height 0.2s cubic-bezier(0.85, 0, 0.15, 1);
+  }
 }
 
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
-    @apply w-[4px]
+    @apply w-[4px];
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-black/10 rounded-[10px]
+    @apply bg-black/10 rounded-[10px];
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-black/20 rounded-[10px]
+    @apply bg-black/20 rounded-[10px];
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#555]
+    @apply bg-[#555];
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -128,6 +164,42 @@ body {
   
   --animate-popup: popup 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
   --animate-popup-close: popupclose 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  --animate-toggleOn: toggleOn 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  --animate-toggleOff: toggleOff 0.115s cubic-bezier(0.85, 0, 0.15, 1);
+  --animate-modal-show: modalShow 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+
+  @keyframes modalShow {
+    0% {
+      opacity: 0;
+      scale: 0.9;
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes toggleOn {
+    0% {
+      left: -4px;
+      right: 0px;
+    }
+    100% {
+      left: 0px;
+      right: -100px;
+    }
+  }
+
+  @keyframes toggleOff {
+    0% {
+      left: 0px;
+      right: -4px;
+    }
+    100% {
+      left: -4px;
+      right: 0px;
+    }
+  }
 
   @keyframes popup {
     0% {

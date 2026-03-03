@@ -8,6 +8,7 @@ export type Path =
   | `/components`
   | `/components/button-components`
   | `/components/input-components`
+  | `/components/modal-components`
   | `/components/select-components`
 
 export type Params = {

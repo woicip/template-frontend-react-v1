@@ -3,16 +3,16 @@ import { cn } from "@/utils/cn";
 import { EyeIcon } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const input = cva("input", {
+const input = cva("", {
   variants: {
     variant: {
-      primary: "py-2.5 px-2.5",
-      disabled: "py-2.5 px-2.5 input-disabled",
+      primary: "input py-2.5 px-2.5",
+      disabled: "input-disabled py-2.5 px-2.5",
     },
     disabled: {
       false: null,
       true: ['cursor-not-allowed'],
-    }
+    },
   },
   defaultVariants: {
     variant: "primary",
@@ -46,6 +46,30 @@ function Input({
     disabled, 
     className: cn(className, icon && "pl-9", isTypePassword && "pr-11") 
   })
+
+  if(type === "range"){
+    return (
+      <input
+        id={id}
+        type={"range"}
+        className="w-full w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary disabled:border-gray-350 disabled:bg-gray-200"
+        disabled={disabled || undefined}
+        {...props}
+      />
+    )
+  }
+
+  if(type === "color"){
+    return (
+      <input
+        id={id}
+        type={"color"}
+        className="w-full"
+        disabled={disabled || undefined}
+        {...props}
+      />
+    )
+  }
 
   if(type === "checkbox"){
     return (
@@ -90,6 +114,36 @@ function Input({
         />
         <div className="absolute left-[4px] w-3 h-3 peer-checked:bg-primary rounded-full" />
         {label && <span className="ml-2 text-regular text-[#333333]">{label}</span>}
+      </label>
+    )
+  }
+
+  if(type === "search"){
+    return (
+      <label htmlFor={id} className="relative flex flex-col gap-[4px]">
+        {label && <span className="mx-2.5 block text-small text-[#333333]">{label}</span>}
+        <div className="relative">
+          {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]">{icon}</span>}
+
+          <input
+            id={id}
+            type={typeValue}
+            className={clsnm}
+            disabled={disabled || undefined}
+            {...props}
+          />
+
+          {isTypePassword && 
+            (
+              <span 
+                className={cn('select-none w-[33px] h-[33px] flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 text-[#999999] rounded-[10px] transition-all', !disabled ? 'cursor-pointer hover:bg-black/5' : 'cursor-not-allowed')}
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                <EyeIcon className="w-[18px] h-[18px]" />
+              </span>
+            )
+          }
+        </div>
       </label>
     )
   }
