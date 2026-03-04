@@ -40,11 +40,12 @@ function Input({
   const [showPassword, setShowPassword] = React.useState(false);
   const isTypePassword = React.useMemo(() => type === "password", [type]);
   const typeValue = isTypePassword ? (showPassword ? "text" : "password") : type;
+  const typeFile = type === "file";
 
   const clsnm = input({ 
     variant, 
     disabled, 
-    className: cn(className, icon && "pl-9", isTypePassword && "pr-11") 
+    className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all")
   })
 
   if(type === "range"){
@@ -68,6 +69,20 @@ function Input({
         disabled={disabled || undefined}
         {...props}
       />
+    )
+  }
+
+  if(type === "file"){
+    return (
+      <label htmlFor={id} className="relative group">
+        <input
+          id={id}
+          type={"file"}
+          className={clsnm}
+          disabled={disabled || undefined}
+          {...props}
+        />
+      </label>
     )
   }
 

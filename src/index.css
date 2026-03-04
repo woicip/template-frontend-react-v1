@@ -15,6 +15,10 @@
 }
 
 @layer component {
+  .card {
+    @apply max-w-[300px] p-[20px] border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
+  }
+
   .input {
     @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
   }
@@ -33,6 +37,10 @@
 
   .natural-gradient {
     @apply bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA];
+  }
+
+  .disabled-gradient {
+    @apply bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA]
   }
 
   .danger-gradient {
