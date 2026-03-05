@@ -66,6 +66,10 @@
   .accordion > div#panel {
     transition: max-height 0.2s cubic-bezier(0.85, 0, 0.15, 1);
   }
+
+  .children-menu {
+    transition: max-height 0.2s ease-out;
+  }
 }
 
 @layer utilities {
