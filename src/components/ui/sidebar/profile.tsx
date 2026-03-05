@@ -1,5 +1,5 @@
 import defaultAvatar from "@/assets/images/avatar.svg";
-import { EllipsisVerticalIcon } from "lucide-react";
+import { ChevronsUpDownIcon } from "lucide-react";
 
 export function Profile(){
   return (
@@ -15,8 +15,11 @@ export function Profile(){
         </div>
       </div>
 
-      <button type="button" className="w-[28px] h-[28px] flex items-center justify-center border border-[#CECECE] rounded-[6px] hover:bg-black/3">
-        <EllipsisVerticalIcon width={18} className="text-[#989898] cursor-pointer" />
+      <button
+        type="button"
+        className="w-[28px] h-[28px] natural-gradient shadow-primary flex items-center justify-center border border-[#CECECE] rounded-[6px] hover:bg-black/3 hover:opacity-80 transition-all"
+      >
+        <ChevronsUpDownIcon width={18} className="text-[#989898] cursor-pointer" />
       </button>
     </div>
   )

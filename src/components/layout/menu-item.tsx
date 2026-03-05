@@ -27,10 +27,10 @@ export function MenuItem(props: MenuIconProps){
   }
 
   return (
-    <div>
+    <div className="select-none">
       <button 
         type="button"
-        className={cn("w-full text-left font-medium py-[8px] px-[12px] rounded-[8px] border border-transparent cursor-pointer", props.active ? "natural-gradient border-black/10" : "hover:bg-white hover:border-black/10", props.children && "flex items-center justify-between")}
+        className={cn("w-full text-left py-[8px] px-[12px] rounded-[8px] border border-transparent cursor-pointer", props.active ? "primary-gradient text-white border-black/10" : "hover:bg-white hover:border-black/10", props.children && "flex items-center justify-between")}
         onClick={onBtnClick}
       >
         <div className="flex items-center gap-[10px]">
@@ -55,7 +55,7 @@ export function MenuItem(props: MenuIconProps){
               <div>
                 {(i+1) === props.children?.length ? <SubMenuLastGlyph /> : <SubMenuContinueGlyph />}
               </div>
-              <button type="button" className={cn('w-full text-left py-[4px] px-[8px] rounded-[5px] border border-transparent cursor-pointer', (i+1) === props.children?.length && "relative top-[7px]", child.active ? "natural-gradient border border-black/10" : "hover:bg-white hover:border-black/10")}>
+              <button type="button" className={cn('w-full text-left py-[4px] px-[8px] rounded-[5px] border border-transparent cursor-pointer', (i+1) === props.children?.length && "relative top-[7px]", child.active ? "primary-gradient text-white border border-black/10" : "hover:bg-white hover:border-black/10")}>
                 <div className="flex items-center gap-[6px]">
                   {child.icon}
                   <p className="text-small">{child.name}</p>
