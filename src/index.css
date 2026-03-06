@@ -2,6 +2,8 @@
 @import "./fonts.css";
 @layer theme, base, components, utilities;
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer theme {
   .toggleOn {
     top: 3px;
@@ -45,6 +47,10 @@
 
   .danger-gradient {
     @apply bg-linear-to-b from-[#F34235] to-[#AC1D12]
+  }
+
+  .dark-natural-gradient {
+    @apply bg-linear-to-b from-[#1E1E1E] to-[#272727]
   }
 
   .toggle-btn > .toggle-btn-pupil {
@@ -112,6 +118,8 @@
 
 :root {
   --color-background: #F8F9FC;
+  --color-background-dark: #121212;
+  --color-dark-text: #D1D5DC;
   --color-text: #04070B;
   --color-primary: #2E57D1;
   --color-secondary: #89A2EB;
@@ -135,7 +143,7 @@
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
   color: var(--color-text);
-  background-color: var(--color-background);
+  /* background-color: var(--color-background); */
 
   font-size: var(--text-regular);
   font-synthesis: none;
@@ -144,14 +152,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+/* body {
   background-color: var(--color-background);
-}
+} */
 
 @theme {
   --font-display: "Inter", sans-serif; 
 
   --color-background: #F8F9FC;
+  --color-background-dark: #121212;
+  --color-dark-text: #D1D5DC;
   --color-text: #04070B;
   --color-primary: #2E57D1;
   --color-secondary: #89A2EB;

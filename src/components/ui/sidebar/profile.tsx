@@ -9,9 +9,9 @@ export function Profile(){
           <img src={defaultAvatar} alt="avatar" />
         </div>
 
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start dark:text-dark-text">
           <p className="font-semibold text-md leading-tight">Joseph</p>
-          <p className="text-small text-black/80">Admin</p>
+          <p className="text-small text-black/80 dark:text-dark-text">Admin</p>
         </div>
       </div>
 

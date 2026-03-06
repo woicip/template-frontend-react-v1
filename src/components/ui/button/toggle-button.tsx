@@ -34,7 +34,7 @@ export function Toggle({
     <button
       type="button" 
       onClick={disabled ? undefined : onToggle}
-      className={cn("toggle-btn relative w-[54px] h-[30px] border border-black/20 rounded-full bg-white has-[:checked]:bg-primary transition-all active:scale-[.95]", disabled ? "bg-[#E8E8E8] cursor-not-allowed" : "cursor-pointer")}
+      className={cn("toggle-btn relative w-[40px] h-[24px] border border-black/20 rounded-full bg-white has-[:checked]:bg-primary transition-all active:scale-[.95]", disabled ? "bg-[#E8E8E8] cursor-not-allowed" : "cursor-pointer")}
     >
       <input
         ref={ref}
@@ -45,7 +45,7 @@ export function Toggle({
       />
       <div 
         ref={toggleRef} 
-        className={cn("toggle-btn-pupil w-[22px] h-[22px] bg-[#E1E1E1] border border-black/0 shadow-primary rounded-full absolute peer-checked:toggleOn peer-checked:bg-white", checked ? "toggleOn" : "toggleOff", disabled && "bg-white border-black/20")}
+        className={cn("toggle-btn-pupil w-[16px] h-[16px] bg-[#E1E1E1] border border-black/0 shadow-primary rounded-full absolute peer-checked:toggleOn peer-checked:bg-white", checked ? "toggleOn" : "toggleOff", disabled && "bg-white border-black/20")}
       ></div>
     </button>
   )
