@@ -1,60 +1,18 @@
-import { BookIcon, HomeIcon, LayoutGrid, LogsIcon, MoonIcon, PanelRight, TerminalIcon } from "lucide-react";
-import { MenuItem, type MenuIconProps } from "@/components/layout/menu-item";
-import { useLocation } from "react-router";
+import { MoonIcon, PanelRight } from "lucide-react";
+import { MenuItem } from "@/components/layout/menu-item";
 import { Profile } from "@/components/ui/sidebar/profile";
 import { Header } from "@/components/layout/header";
-import { useState, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import { Toggle } from "../ui/button/toggle-button";
+import { useMenu } from "./menu";
+import { useTheme } from "@/context/theme-context";
 
 
 export default function DashboardLayout(props: PropsWithChildren){
-  const location = useLocation();
-  const [darkMode, setDarkMode] = useState(false);
-  
-  const MENU = [
-    {
-      name: "Dashboard",
-      icon: <HomeIcon width={18} height={18} />,
-      active: location.pathname === "/dashboard",
-      children: [
-        {
-          name: "General",
-          active: location.pathname === "/dashboard",
-          icon: <LayoutGrid width={16} height={16} />,
-        },
-        {
-          name: "Report",
-          active: false,
-          icon: <BookIcon width={16} height={16} />,
-        },
-        {
-          name: "Logs",
-          active: false,
-          icon: <LogsIcon width={16} height={16} />,
-        },
-      ]
-    },
-    {
-      name: "Report",
-      active: false,
-      icon: <BookIcon width={18} height={18} />,
-    },
-    {
-      name: "Logs",
-      active: false,
-      icon: <LogsIcon width={18} height={18} />,
-    },
-    {
-      name: "Commands",
-      active: false,
-      icon: <TerminalIcon width={18} height={18} />,
-    },
-  ] as MenuIconProps[]
-  
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle("dark");
-  }
+  const { theme, toggleTheme } = useTheme();
+  const menu = useMenu();
+  const darkMode = theme === "dark";
+  const toggleDarkMode = () => toggleTheme();
 
   return (
     <div className="flex grid grid-cols-[270px_1fr]">
@@ -79,7 +37,7 @@ export default function DashboardLayout(props: PropsWithChildren){
               </div>
 
               <div className="flex flex-col gap-[2px]">
-                { MENU.map((menu) => <MenuItem key={menu.name} {...menu}/>) }
+                { menu.map((menu) => <MenuItem key={menu.name} {...menu}/>) }
               </div>
             </div>
 
@@ -94,7 +52,7 @@ export default function DashboardLayout(props: PropsWithChildren){
                   type="button"
                   className={"w-full text-left py-[8px] px-[12px] rounded-[8px] border border-transparent cursor-pointer flex items-center justify-between"}
                 >
-                  <div className="flex items-center gap-[10px] dark:text-dark-text">
+                  <div className="flex items-center gap-[10px] dark:text-dark-gray">
                     <MoonIcon />
                     <p>Dark Mode</p>
                   </div>

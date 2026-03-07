@@ -11,6 +11,12 @@ export type Path =
   | `/components/modal-components`
   | `/components/select-components`
   | `/dashboard`
+  | `/dashboard/accordion`
+  | `/dashboard/alert`
+  | `/dashboard/button`
+  | `/dashboard/input`
+  | `/dashboard/select`
+  | `/dashboard/stepper`
 
 export type Params = {
   

@@ -5,9 +5,9 @@ import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 const button = cva("w-fit flex items-center active:scale-[.95] transition-all", {
   variants: {
     variant: {
-      primary: "bg-linear-to-b from-accent to-primary border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white",
-      secondary: "bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-text",
-      disabled: "bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA] border border-black/10 shadow-primary text-[#838383]",
+      primary: "bg-primary-gradient border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white",
+      secondary: "bg-natural-gradient dark:bg-dark-natural-gradient dark:text-dark-gray dark:border-dark-border border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-text",
+      disabled: "bg-disabled-gradient dark:bg-dark-natural-gradient border border-black/10 shadow-primary text-[#838383]",
       danger: "danger-gradient border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white transition-all",
     },
     size: {

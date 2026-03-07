@@ -45,7 +45,7 @@ function Input({
   const clsnm = input({ 
     variant, 
     disabled, 
-    className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all", "dark:bg-dark-natural-gradient")
+    className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all", "dark:bg-dark-natural-gradient dark:text-white")
   })
 
   if(type === "range"){
@@ -112,7 +112,7 @@ function Input({
         >
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
-        {label && <span className="ml-2 text-regular text-[#333333]">{label}</span>}
+        {label && <span className="ml-2 text-regular text-[#333333] dark:text-dark-gray">{label}</span>}
       </label>
     )
   }
@@ -128,7 +128,7 @@ function Input({
           {...props}
         />
         <div className="absolute left-[4px] w-3 h-3 peer-checked:bg-primary rounded-full" />
-        {label && <span className="ml-2 text-regular text-[#333333]">{label}</span>}
+        {label && <span className="ml-2 text-regular text-[#333333] dark:text-dark-gray">{label}</span>}
       </label>
     )
   }
@@ -136,7 +136,7 @@ function Input({
   if(type === "search"){
     return (
       <label htmlFor={id} className="relative flex flex-col gap-[4px]">
-        {label && <span className="mx-2.5 block text-small text-[#333333]">{label}</span>}
+        {label && <span className="mx-2.5 block text-small text-[#333333] dark:text-dark-gray">{label}</span>}
         <div className="relative">
           {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]">{icon}</span>}
 
@@ -165,7 +165,7 @@ function Input({
 
   return (
     <label htmlFor={id} className="relative flex flex-col gap-[4px]">
-      {label && <span className="mx-2.5 block text-small text-[#333333]">{label}</span>}
+      {label && <span className="mx-2.5 block text-small text-[#333333] dark:text-dark-gray">{label}</span>}
       <div className="relative">
         {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999999]">{icon}</span>}
 

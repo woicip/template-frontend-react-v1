@@ -26,7 +26,7 @@
   }
 
   .input-disabled {
-    @apply border border-[#E5E5E5] bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA] hover:shadow-primary rounded-[12px];
+    @apply border border-[#E5E5E5] bg-disabled-gradient dark:bg-dark-natural-gradient dark:border-0 hover:shadow-primary rounded-[12px];
   }
 
   .select-none {
@@ -121,6 +121,7 @@
   --color-background-dark: #121212;
   --color-dark-text: #D1D5DC;
   --color-text: #04070B;
+  --color-dark-gray: #D1D5DC;
   --color-primary: #2E57D1;
   --color-secondary: #89A2EB;
   --color-accent: #5D80EA;
@@ -162,8 +163,8 @@
 
   --color-background: #F8F9FC;
   --color-background-dark: #121212;
-  --color-dark-text: #D1D5DC;
   --color-text: #04070B;
+  --color-dark-gray: #D1D5DC;
   --color-primary: #2E57D1;
   --color-secondary: #89A2EB;
   --color-accent: #5D80EA;
@@ -189,6 +190,7 @@
   --background-image-primary-gradient: linear-gradient(to bottom, var(--color-accent), var(--color-primary));
   --background-image-natural-gradient: linear-gradient(to bottom, #FFFFFF, #FAFAFA);
   --background-image-dark-natural-gradient: linear-gradient(to bottom, #272727, #1E1E1E);
+  --background-image-disabled-gradient: linear-gradient(to bottom, #F5F5F5, #EAEAEA);
   
   --animate-popup: popup 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
   --animate-popup-close: popupclose 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;

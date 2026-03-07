@@ -21,21 +21,13 @@ export function DropdownButton(props: DropdownButtonProps){
   const dropdownRef = useRef<HTMLDivElement>(null);
   const ref = useOutsideClick((isOutside) => {
     if(isOutside){
-      onClose()
-
+      closeDropdown()
     } else {
-      setOpen(true);
-      requestAnimationFrame(() => {
-        dropdownRef.current?.classList.add("animate-popup")
-        const handleClose = () => {
-          dropdownRef.current?.removeEventListener('animationend', handleClose);
-        }
-        dropdownRef.current?.addEventListener("animationend", handleClose)
-      })
+      openDropdown()
     }
   })
 
-  const onClose = () => {
+  const closeDropdown = () => {
     dropdownRef.current?.classList.remove("animate-popup")
     dropdownRef.current?.classList.add("animate-popup-close")
     const handleClose = () => {
@@ -45,9 +37,20 @@ export function DropdownButton(props: DropdownButtonProps){
     dropdownRef.current?.addEventListener("animationend", handleClose)
   }
 
+  const openDropdown = () => {
+    setOpen(true);
+    requestAnimationFrame(() => {
+      dropdownRef.current?.classList.add("animate-popup")
+      const handleClose = () => {
+        dropdownRef.current?.removeEventListener('animationend', handleClose);
+      }
+      dropdownRef.current?.addEventListener("animationend", handleClose)
+    })
+  }
+
   const handleOptionClick = (option: DropdownOptionValue) => {
     props.onChange(option);
-    onClose()
+    closeDropdown()
   }
 
   return (
@@ -57,6 +60,7 @@ export function DropdownButton(props: DropdownButtonProps){
         mode={open ? 'open' : 'closed'} 
         variant={"secondary"} 
         className={cn("w-full focus:shadow-hover")}
+        // onClick={onClickBtn}
       >
         {props.children}
       </Button>
@@ -64,14 +68,14 @@ export function DropdownButton(props: DropdownButtonProps){
       { open ? (
           <div 
             ref={dropdownRef} 
-            className="w-full max-h-[250px] origin-top absolute bottom-[-255px] flex flex-col rounded-[8px] border border-black/10 left-0 right-0 natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar"
+            className="w-full max-h-[250px] origin-top absolute bottom-[-255px] flex flex-col rounded-[8px] border border-black/10 left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar"
           >
             {
               props.options.map((option) => (
                 <button 
                   key={option.value}
                   type="button" 
-                  className="border-b border-black/10 py-[8px] px-[10px] text-regular text-text text-left hover:bg-black/5 cursor-pointer"
+                  className="border-b border-black/10 dark:border-dark-border py-[8px] px-[10px] text-regular text-text text-left hover:bg-black/5 cursor-pointer dark:text-dark-gray hover:dark:bg-white/10"
                   onClick={handleOptionClick.bind(null, option)}
                 >
                   {option.label}
