@@ -18,11 +18,11 @@
 
 @layer component {
   .card {
-    @apply max-w-[300px] p-[20px] border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
+    @apply max-w-[300px] p-[20px] border border-[#E0E0E0] bg-natural-gradient placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
   }
 
   .input {
-    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
+    @apply border border-[#E0E0E0] bg-natural-gradient dark:bg-dark-natural-gradient dark:border-dark-border placeholder:text-[#999999] outline-none focus:ring-4 dark:focus:ring-[#6EB9FF]/40 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary dark:focus:ring-offset-[#8DA9FF] invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary hover:shadow-hover rounded-[12px] transition-all;
   }
 
   .input-disabled {
@@ -34,7 +34,7 @@
   }
 
   .primary-gradient {
-    @apply bg-linear-to-b from-accent to-primary
+    @apply bg-linear-to-b from-accent to-primary;
   }
 
   .natural-gradient {
@@ -42,15 +42,15 @@
   }
 
   .disabled-gradient {
-    @apply bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA]
+    @apply bg-linear-to-b from-[#F5F5F5] to-[#EAEAEA];
   }
 
   .danger-gradient {
-    @apply bg-linear-to-b from-[#F34235] to-[#AC1D12]
+    @apply bg-linear-to-b from-[#F34235] to-[#AC1D12];
   }
 
   .dark-natural-gradient {
-    @apply bg-linear-to-b from-[#1E1E1E] to-[#272727]
+    @apply bg-linear-to-b from-[#1E1E1E] to-[#272727];
   }
 
   .toggle-btn > .toggle-btn-pupil {
@@ -58,7 +58,7 @@
   }
 
   .accordion {
-    @apply border border-[#E0E0E0] bg-linear-to-b from-[#FFFFFF] to-[#FAFAFA] placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary rounded-[12px] transition-all;
+    @apply border border-[#E0E0E0] bg-natural-gradient placeholder:text-[#999999] outline-none focus:ring-4 focus:ring-ringsecondary focus:ring-offset-1 focus:ring-offset-ringprimary invalid:focus:ring-offset-red-500 invalid:focus:ring-red-500/20 shadow-primary rounded-[12px] transition-all;
   }
 
   .accordion > button:first-child {
@@ -129,6 +129,7 @@
   --color-ringprimary: #5D80EA;
   --color-ringsecondary: #D0E8FF;
   --color-border: #E5E5E5;
+  --color-dark-border: #3D3D3D;
 
   --text-very-small: 11.1px;
   --text-small: 13.3px;
@@ -170,6 +171,7 @@
   --color-success: #00BA00;
   --color-ringprimary: #5D80EA;
   --color-ringsecondary: #D0E8FF;
+  --color-dark-border: #3D3D3D;
 
   --shadow-primary: 0px 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0px 2px 4px 1px rgba(0, 0, 0, 0.08);
@@ -183,6 +185,10 @@
   --text-regular: 16px;
   --text-small: 13.3px;
   --text-very-small: 11.11px;
+
+  --background-image-primary-gradient: linear-gradient(to bottom, var(--color-accent), var(--color-primary));
+  --background-image-natural-gradient: linear-gradient(to bottom, #FFFFFF, #FAFAFA);
+  --background-image-dark-natural-gradient: linear-gradient(to bottom, #272727, #1E1E1E);
   
   --animate-popup: popup 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
   --animate-popup-close: popupclose 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;

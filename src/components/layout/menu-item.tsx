@@ -30,7 +30,11 @@ export function MenuItem(props: MenuIconProps){
     <div className="select-none">
       <button 
         type="button"
-        className={cn("w-full text-left py-[8px] px-[12px] rounded-[8px] border border-transparent cursor-pointer", props.active ? "primary-gradient text-white dark:text-white border-black/10" : "hover:bg-white dark:hover:bg-[#272727] hover:border-black/10 dark:text-dark-text", props.children && "flex items-center justify-between")}
+        className={cn(
+          "w-full text-left py-[8px] px-[12px] rounded-[8px] border border-transparent cursor-pointer",
+          props.active ? "primary-gradient text-white border-black/10 dark:border-white/10" : "hover:bg-primary-gradient hover:text-white hover:border-black/10 dark:text-dark-text",
+          props.children && "flex items-center justify-between"
+        )}
         onClick={onBtnClick}
       >
         <div className="flex items-center gap-[10px]">
@@ -55,7 +59,7 @@ export function MenuItem(props: MenuIconProps){
               <div>
                 {(i+1) === props.children?.length ? <SubMenuLastGlyph /> : <SubMenuContinueGlyph />}
               </div>
-              <button type="button" className={cn('w-full text-left py-[4px] px-[8px] rounded-[5px] border border-transparent cursor-pointer', (i+1) === props.children?.length && "relative top-[7px]", child.active ? "primary-gradient text-white border border-black/10" : "hover:bg-primary dark:hover:bg-[#272727] hover:border-black/10 hover:text-text dark:hover:text-dark-text dark:text-dark-text")}>
+              <button type="button" className={cn('w-full text-left py-[4px] px-[8px] rounded-[5px] border border-transparent cursor-pointer', (i+1) === props.children?.length && "relative top-[7px]", child.active ? "primary-gradient text-white border border-black/10" : "hover:bg-primary-gradient hover:text-white dark:hover:bg-[#272727] hover:border-black/10 dark:hover:text-dark-text dark:text-dark-text")}>
                 <div className="flex items-center gap-[6px]">
                   {child.icon}
                   <p className="text-small">{child.name}</p>

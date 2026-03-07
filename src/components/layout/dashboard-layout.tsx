@@ -66,7 +66,7 @@ export default function DashboardLayout(props: PropsWithChildren){
               <h1 className="font-bold font-regular dark:text-white">Dashboard</h1>
             </div>
 
-            <div className="w-[30px] h-[30px] p-[5px] natural-gradient shadow-primary bg-white flex items-center justify-center border border-black/10 rounded-[7px] cursor-pointer hover:bg-black/5 transition-all hover:opacity-80 transition-all dark:dark-natural-gradient">
+            <div className="w-[30px] h-[30px] p-[5px] bg-natural-gradient dark:bg-dark-natural-gradient dark:border-dark-border dark:text-white shadow-primary bg-white flex items-center justify-center border border-black/10 rounded-[7px] cursor-pointer hover:bg-black/5 transition-all hover:opacity-80 transition-all dark:dark-natural-gradient">
               <PanelRight width={16} height={16} />
             </div>
           </div>

@@ -17,7 +17,7 @@ export function Profile(){
 
       <button
         type="button"
-        className="w-[28px] h-[28px] natural-gradient shadow-primary flex items-center justify-center border border-[#CECECE] rounded-[6px] hover:bg-black/3 hover:opacity-80 transition-all"
+        className="w-[28px] h-[28px] bg-natural-gradient shadow-primary flex items-center justify-center border border-[#CECECE] rounded-[6px] hover:bg-black/3 hover:opacity-80 transition-all dark:bg-dark-natural-gradient dark:border-dark-border dark:text-white"
       >
         <ChevronsUpDownIcon width={18} className="text-[#989898] cursor-pointer" />
       </button>

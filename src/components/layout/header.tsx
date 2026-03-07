@@ -7,9 +7,10 @@ export function Header(){
       <h1 className="font-semibold text-black text-h5 dark:text-white">Dashboard</h1>
       
       <div className="flex items-center gap-2">
-        <button type="button" className="natural-gradient p-[8px] border border-[#E3E3E3] rounded-[10px] cursor-pointer shadow-primary">
+        <button type="button" className="bg-natural-gradient p-[8px] border border-[#E3E3E3] rounded-[10px] cursor-pointer shadow-primary dark:text-white dark:border-dark-border dark:bg-dark-natural-gradient">
           <BellIcon width={16} height={16} />
         </button>
+        
         <Input 
           type="text" 
           placeholder="Search" 
