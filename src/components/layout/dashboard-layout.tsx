@@ -29,9 +29,9 @@ export default function DashboardLayout(props: PropsWithChildren){
             </div>
           </div>
 
-          <div className="flex flex-col gap-[30px]">
-            <div className="flex flex-col gap-[10px]">
-              <div className="text-very-small font-bold flex flex-col items-start gap-[8px]">
+          <div className="max-h-[80vh] overflow-auto flex flex-col gap-[30px] custom-scrollbar">
+            <div className="flex flex-col gap-[10px] realtive">
+              <div className="sticky top-0 text-very-small font-bold flex flex-col items-start gap-[8px] bg-background dark:bg-background-dark">
                 <p className="text-[#8A94B3]">MENU</p>
                 <div className="w-full h-[1px] bg-[#D8DCE9] dark:bg-[#303030]"></div>
               </div>
@@ -42,7 +42,7 @@ export default function DashboardLayout(props: PropsWithChildren){
             </div>
 
             <div className="flex flex-col gap-[10px]">
-              <div className="text-very-small font-bold flex flex-col items-start gap-[8px]">
+              <div className="sticky top-0 text-very-small font-bold flex flex-col items-start gap-[8px] bg-background dark:bg-background-dark">
                 <p className="text-[#8A94B3]">UTILITY</p>
                 <div className="w-full h-[1px] bg-[#D8DCE9] dark:bg-[#303030]"></div>
               </div>

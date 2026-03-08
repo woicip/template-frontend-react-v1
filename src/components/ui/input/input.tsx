@@ -45,7 +45,7 @@ function Input({
   const clsnm = input({ 
     variant, 
     disabled, 
-    className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all", "dark:bg-dark-natural-gradient dark:text-white")
+    className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all", "dark:text-white")
   })
 
   if(type === "range"){
@@ -92,7 +92,7 @@ function Input({
         <input
           id={id}
           type={"checkbox"}
-          className="peer appearance-none w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 disabled:border-gray-350 disabled:bg-gray-200"
+          className="peer appearance-none w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary-gradient focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:dark:ring-offset-transparent disabled:border-gray-350 disabled:bg-gray-200 dark:border-dark-border"
           disabled={disabled || undefined}
           {...props}
         />
@@ -100,7 +100,7 @@ function Input({
           className="
             absolute left-[2px] top-0
             w-4 h-4 mt-1
-            hidden peer-disabled:text-text/40 peer-checked:block pointer-events-none"
+            hidden peer-disabled:dark:text-text/40 peer-disabled:dark:text-white/60 peer-checked:block pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
