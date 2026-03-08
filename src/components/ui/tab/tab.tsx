@@ -4,10 +4,10 @@ import type { ButtonHTMLAttributes, DetailedHTMLProps } from "react"
 const tabButton = cva("py-[8px] px-[20px] rounded-t-[10px] border-b border-black/10", {
   variants: {
     variant: {
-      active: "primary-gradient text-white cursor-pointer",
-      secondary: "cursor-pointer hover:natural-gradient hover:border-primary",
-      activeDisabled: "disabled-gradient text-black/30 border-t border-r border-l",
-      disabled: "text-black/30",
+      active: "bg-primary-gradient text-white cursor-pointer",
+      secondary: "dark:text-white cursor-pointer dark:border-dark-border hover:natural-gradient hover:bg-primary-gradient hover:text-white transition-all",
+      activeDisabled: "bg-disabled-gradient dark:bg-dark-natural-gradient dark:text-white/30 text-black/30 border border-b-0 border-t border-l border-r dark:border-dark-border",
+      disabled: "text-black/30 dark:text-white/30 dark:border-dark-border",
     },
     disabled: {
       true: ["cursor-default"],

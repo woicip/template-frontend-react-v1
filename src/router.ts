@@ -13,10 +13,15 @@ export type Path =
   | `/dashboard`
   | `/dashboard/accordion`
   | `/dashboard/alert`
+  | `/dashboard/avatar`
   | `/dashboard/button`
+  | `/dashboard/card`
+  | `/dashboard/file-upload`
   | `/dashboard/input`
+  | `/dashboard/modal-overlay`
   | `/dashboard/select`
   | `/dashboard/stepper`
+  | `/dashboard/tabs`
 
 export type Params = {
   

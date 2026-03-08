@@ -34,7 +34,7 @@ export function Toggle({
     <button
       type="button" 
       onClick={disabled ? undefined : onToggle}
-      className={cn("toggle-btn relative w-[40px] h-[24px] border border-black/20 rounded-full bg-white has-[:checked]:bg-primary transition-all active:scale-[.95]", disabled ? "bg-[#E8E8E8] cursor-not-allowed" : "cursor-pointer")}
+      className={cn("toggle-btn relative w-[40px] h-[24px] border border-black/20 dark:border-dark-border rounded-full bg-white dark:bg-dark-natural-gradient has-[:checked]:bg-primary-gradient transition-all active:scale-[.95]", disabled ? "bg-[#E8E8E8] cursor-not-allowed" : "cursor-pointer")}
     >
       <input
         ref={ref}

@@ -6,7 +6,7 @@ const button = cva("w-fit flex items-center active:scale-[.95] transition-all", 
   variants: {
     variant: {
       primary: "bg-primary-gradient border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white",
-      secondary: "bg-natural-gradient dark:bg-dark-natural-gradient dark:text-dark-gray dark:border-dark-border border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-text",
+      secondary: "bg-natural-gradient dark:bg-dark-natural-gradient dark:text-dark-gray dark:border-dark-border border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-text hover:dark:bg-dark-natural-2-gradient",
       disabled: "bg-disabled-gradient dark:bg-dark-natural-gradient border border-black/10 shadow-primary text-[#838383]",
       danger: "danger-gradient border border-black/10 shadow-primary hover:shadow-hover hover:opacity-95 text-white transition-all",
     },

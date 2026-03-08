@@ -13,17 +13,20 @@ function AccordionItem(props: AccordionItemProps){
 
   const onClick = () => {
     setOpen(!open);
-    // const value = `max-h-[${panelRef.current?.scrollHeight}px]`;
-    // console.log(value)
-    // panelRef.current?.classList.add(value);
-    // panelRef.current?.classList.remove('max-h-[0px]');
+    let current = panelRef.current;
+
+    if(open){
+      current?.style.setProperty("max-height", "0px");
+    } else {
+      current?.style.setProperty("max-height", `${current.scrollHeight}px`);
+    }
   }
 
   return (
     <>
       <button
         type="button" 
-        className="w-full p-[15px] flex items-center gap-[20px] border-t border-black/10 cursor-pointer hover:bg-black/3"
+        className="w-full p-[15px] flex items-center gap-[20px] border-t border-black/10 dark:border-white/10 cursor-pointer hover:bg-black/3 dark:text-dark-gray"
         onClick={onClick}
       >
         {open ? (
@@ -37,9 +40,10 @@ function AccordionItem(props: AccordionItemProps){
       <div 
         id="panel"
         ref={panelRef}
-        className={cn("w-full overflow-hidden bg-black/3", open ? `max-h-[${panelRef.current?.scrollHeight}px] border-t border-black/10` : "max-h-[0px]")}
+        style={{ maxHeight: '0px' }}
+        className={cn("w-full overflow-hidden bg-black/3 dark:bg-white/3", open ? `border-t border-black/10 dark:border-white/10` : "")}
       >
-        <p className="w-full p-[15px]">
+        <p className="w-full p-[15px] dark:text-dark-gray">
           {props.content}
         </p>
       </div>
@@ -68,10 +72,12 @@ export function Accordion(){
   ]
 
   return (
-    <div className="accordion overflow-hidden">
-      {
-        data.map((item) => (
-          <AccordionItem title={item.title} content={item.content} />
+    <div className="accordion">
+      { data.map((item) => (
+          <AccordionItem 
+            title={item.title} 
+            content={item.content} 
+          />
         ))
       }
     </div>

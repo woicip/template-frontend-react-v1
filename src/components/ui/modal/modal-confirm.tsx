@@ -37,7 +37,7 @@ export function ModalConfirm({
           <Button
             type='button'
             variant={"secondary"}
-            className='w-full'
+            className='w-full hover:dark:bg-white/10'
             onClick={onClose}
           >
             Cancel
