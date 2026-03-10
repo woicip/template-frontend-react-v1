@@ -1,9 +1,11 @@
-import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, UserIcon } from "lucide-react"
+import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, SparkleIcon, UserIcon } from "lucide-react"
 import type { MenuIconProps } from "./menu-item"
 import { useLocation } from "react-router"
+import { useCollapse } from "@/context/collapse-context";
 
 function useMenu(){
   const location = useLocation();
+  const { collapse } = useCollapse();
 
   return [
     {
@@ -11,14 +13,14 @@ function useMenu(){
       href: "/dashboard",
       icon: <HomeIcon width={18} height={18} />,
       active: location.pathname === "/dashboard",
-      children: [
+      children: !collapse ? [
         {
           name: "General",
           href: "/dashboard",
           active: location.pathname === "/dashboard",
           icon: <LayoutGrid width={16} height={16} />,
         },
-      ]
+      ] : []
     },
     {
       name: "Input",
@@ -85,6 +87,12 @@ function useMenu(){
       href: "/dashboard/tabs",
       active: location.pathname === "/dashboard/tabs",
       icon: <BetweenVerticalEnd width={18} height={18} />,
+    },
+    {
+      name: "Free",
+      href: "/dashboard/free",
+      active: location.pathname === "/dashboard/free",
+      icon: <SparkleIcon width={18} height={18} />,
     },
   ] as MenuIconProps[]
 }

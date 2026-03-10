@@ -154,10 +154,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* body {
-  background-color: var(--color-background);
-} */
-
 @theme {
   --font-display: "Inter", sans-serif; 
 
