@@ -1,4 +1,4 @@
-import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, SparkleIcon, TableIcon, UserIcon } from "lucide-react"
+import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, ChevronUpIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, SparkleIcon, TableIcon, UserIcon } from "lucide-react"
 import type { MenuIconProps } from "./menu-item"
 import { useLocation } from "react-router"
 import { useCollapse } from "@/context/collapse-context";
@@ -93,6 +93,12 @@ function useMenu(){
       href: "/dashboard/table",
       active: location.pathname === "/dashboard/table",
       icon: <TableIcon width={18} height={18} />,
+    },
+    {
+      name: "Tooltip",
+      href: "/dashboard/tooltip",
+      active: location.pathname === "/dashboard/tooltip",
+      icon: <ChevronUpIcon width={18} height={18} />,
     },
     {
       name: "Free",

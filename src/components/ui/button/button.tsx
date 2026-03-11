@@ -17,7 +17,7 @@ const button = cva("w-fit flex items-center active:scale-[.95] transition-all", 
     },
     disabled: {
       false: ["cursor-pointer"],
-      true: ['cursor-not-allowed']
+      true: ['cursor-not-allowed', 'border-0', 'hover:dark:bg-dark-natural-gradient', 'active:scale-[1]', 'hover:shadow-primary']
     },
   },
   defaultVariants: {

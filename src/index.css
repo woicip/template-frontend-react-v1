@@ -193,8 +193,8 @@
   /* Alert Gradients */
   --background-image-alert-danger-gradient: linear-gradient(to bottom, #FFF9F9, #FFDEDE);
   --background-image-alert-success-gradient: linear-gradient(to bottom, #F9FFF9, #E5FFE5);
-  --background-image-alert-danger-dark-gradient: linear-gradient(to bottom, #281818, #4A1616);
-  --background-image-alert-success-dark-gradient: linear-gradient(to bottom, #0E250E, #124112);
+  --background-image-alert-danger-dark-gradient: linear-gradient(to bottom, #4A1616, #281818);
+  --background-image-alert-success-dark-gradient: linear-gradient(to bottom, #124112, #0E250E);
   
   --animate-popup: popup 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;
   --animate-popup-close: popupclose 0.115s cubic-bezier(0.85, 0, 0.15, 1) forwards;

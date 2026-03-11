@@ -22,7 +22,9 @@ export type Path =
   | `/dashboard/modal-overlay`
   | `/dashboard/select`
   | `/dashboard/stepper`
+  | `/dashboard/table`
   | `/dashboard/tabs`
+  | `/dashboard/tooltip`
 
 export type Params = {
   

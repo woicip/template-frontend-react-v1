@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.19",
     "@generouted/react-router": "^1.20.0",
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/postcss": "^4.2.1",
