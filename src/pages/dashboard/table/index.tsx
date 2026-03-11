@@ -51,7 +51,7 @@ export default function Index(){
         <THead>
           <Tr>
             <Th>
-              <Input type="checkbox" />
+              <Input type="checkbox" variant={"disabled"} disabled className="dark:bg-black/50" />
             </Th>
             <Th>No</Th>
             <Th>Phone Number</Th>
@@ -66,7 +66,7 @@ export default function Index(){
             data.map((item) => (
               <Tr key={item.id}>
                 <Td>
-                  <Input type="checkbox" />
+                  <Input type="checkbox" className="dark:bg-black/50" />
                 </Td>
                 <Td className="w-0 py-[16px] px-[20px] border-b border-black/10 dark:border-white/10">
                   {item.id}
@@ -95,10 +95,7 @@ export default function Index(){
           }
         </TBody>
       </Table>
-
-      <div>
-        
-      </div>
+      <Table.Pagination />
     </div>
   )
 }
