@@ -68,7 +68,7 @@ export function DropdownButton(props: DropdownButtonProps){
       { open ? (
           <div 
             ref={dropdownRef} 
-            className="w-full max-h-[250px] origin-top absolute bottom-[-255px] flex flex-col rounded-[8px] border border-black/10 left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar"
+            className="w-full max-h-[250px] origin-top absolute top-[48px] flex flex-col rounded-[8px] border border-black/10 dark:border-dark-border left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar dark:shadow-2xl"
           >
             {
               props.options.map((option) => (

@@ -92,7 +92,7 @@ function Input({
         <input
           id={id}
           type={"checkbox"}
-          className="peer appearance-none w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary-gradient focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:dark:ring-offset-transparent disabled:border-gray-350 disabled:bg-gray-200 dark:border-dark-border"
+          className={cn("peer appearance-none w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white dark:bg-[#1E1E1E] checked:bg-primary-gradient focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:dark:ring-offset-transparent disabled:border-gray-350 disabled:bg-gray-200 dark:border-dark-border", className)}
           disabled={disabled || undefined}
           {...props}
         />
