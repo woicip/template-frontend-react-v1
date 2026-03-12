@@ -94,6 +94,67 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-[#555];
   }
+  
+  .custom-slider {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 100%;
+    height: 5px;
+    
+    cursor: pointer;
+    outline: none;
+    border-radius: 16px;
+
+    @apply bg-[#D9D9D9] dark:bg-dark-border
+  }
+
+  .custom-slider::-webkit-slider-runnable-track {
+    height: 5px;
+    border-radius: 10px;
+  }
+
+  .custom-slider::-moz-range-track {
+    height: 5px;
+    border-radius: 10px;
+  }
+
+  .custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+    height: 15px;
+    width: 15px;
+
+    background-color: #fff;
+    border-radius: 50%;
+    border: 3px solid var(--color-primary);
+
+    position: relative;
+    bottom: 5px;
+
+    transition: .2s ease-in-out;
+  }
+
+  .custom-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 10px rgba(46, 87, 209, .2);
+  }
+
+  .custom-slider:active::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 13px rgba(46, 87, 209, .2);
+  }
+
+  .custom-slider:focus::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 13px rgba(46, 87, 209, .2);
+  }
+
+  .custom-slider::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+  }
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -123,6 +184,7 @@
   --color-text: #04070B;
   --color-dark-gray: #D1D5DC;
   --color-primary: #2E57D1;
+  --color-primary-rgb: rgb(46 87 209);
   --color-secondary: #89A2EB;
   --color-accent: #5D80EA;
   --color-danger: #F34235;
@@ -141,6 +203,19 @@
   --text-h3: 33.8px;
   --text-h2: 39.8px;
   --text-h1: 47.8px;
+
+  --background-image-primary-gradient: linear-gradient(to bottom, var(--color-accent), var(--color-primary));
+  --background-image-natural-gradient: linear-gradient(to bottom, #FFFFFF, #FAFAFA);
+  --background-image-dark-natural-gradient: linear-gradient(to bottom, #272727, #1E1E1E);
+  --background-image-dark-natural-2-gradient: linear-gradient(to bottom, #373737, #262626);
+  --background-image-dark-natural-3-gradient: linear-gradient(to bottom, #282828, #232323);
+  --background-image-disabled-gradient: linear-gradient(to bottom, #F5F5F5, #EAEAEA);
+
+  /* Alert Gradients */
+  --background-image-alert-danger-gradient: linear-gradient(to bottom, #FFF9F9, #FFDEDE);
+  --background-image-alert-success-gradient: linear-gradient(to bottom, #F9FFF9, #E5FFE5);
+  --background-image-alert-danger-dark-gradient: linear-gradient(to bottom, #4A1616, #281818);
+  --background-image-alert-success-dark-gradient: linear-gradient(to bottom, #124112, #0E250E);
 
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;

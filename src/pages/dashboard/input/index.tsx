@@ -68,13 +68,11 @@ export default function Index(){
           placeholder="Search" 
           className="w-full"
         />
-        <Input 
-          type="range"
-          variant="primary" 
-          label="Range"
-          placeholder="Search" 
-          className="w-full"
-          onChange={(e) => console.log(e.target.value)}
+        <Input.Range
+          min={0}
+          max={50}
+          step={10}
+          onRangeChange={(range) => console.log(range)}
         />
         <Input 
           type="color"

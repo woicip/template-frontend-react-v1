@@ -1,3 +1,4 @@
+import './table.css';
 import { cn } from "@/utils/cn";
 import { useState, type DetailedHTMLProps, type HTMLAttributes, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from "react";
 import { DropdownButton, type DropdownOptionValue } from "../button/dropdown-button";
@@ -38,25 +39,25 @@ function TablePagination(){
       </div>
 
       <div className="flex items-center gap-2">
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
           <ChevronsLeftIcon width={18} height={18} />
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
           <ChevronLeftIcon width={18} height={18} />
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-dark-gray bg-primary-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-white dark:text-dark-gray bg-primary-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
           1
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-black dark:text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
           2
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-black dark:text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
           3
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
           <ChevronsRightIcon width={18} height={18} />
         </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
           <ChevronRightIcon width={18} height={18} />
         </button>
       </div>

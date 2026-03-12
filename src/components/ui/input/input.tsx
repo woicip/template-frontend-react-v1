@@ -2,6 +2,7 @@ import * as React from "react";
 import { cn } from "@/utils/cn";
 import { EyeIcon } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { useTheme } from "@/context/theme-context";
 
 const input = cva("", {
   variants: {
@@ -27,6 +28,43 @@ type CustomInputProps = {
 type InputProps = VariantProps<typeof input>;
 type InputComponentProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & InputProps & CustomInputProps
 
+function InputRange(props: InputComponentProps & { onRangeChange?: (val: number) => void }){
+  let ref = React.useRef<HTMLInputElement>(null);
+  const {theme} = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const onRangeChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+    const value = e.target.value;
+    let current = ref.current as HTMLInputElement;
+    const progress = (Number(value) / Number(ref.current?.max)) * 100;
+
+    setValue(Number(value));
+    current.style.background = `linear-gradient(to right, #2E57D1 ${progress}%, ${theme === "light" ? "#D9D9D9" : "#3D3D3D"} ${progress}%)`;
+    props.onRangeChange?.(Number(value));
+  }
+  
+  React.useEffect(() => {
+    let current = ref.current as HTMLInputElement;
+    const progress = (Number(value) / Number(ref.current?.max)) * 100;
+    current.style.background = `linear-gradient(to right, #2E57D1 ${progress}%, ${theme === "light" ? "#D9D9D9" : "#3D3D3D"} ${progress}%)`;
+  }, [theme])
+
+  return (
+    <input
+      ref={ref}
+      type={"range"}
+      min={props.min || 0}
+      max={props.max || 50}
+      step={props.step || 1}
+      value={value}
+      className="custom-slider dark:bg-[#1E1E1E]"
+      disabled={props.disabled || undefined}
+      onChange={onRangeChange}
+      {...props}
+    />
+  )
+}
+
 function Input({
   id = `input-${Math.random().toString(16).slice(2)}`,
   className,
@@ -47,18 +85,6 @@ function Input({
     disabled, 
     className: cn(className, icon && "pl-9", isTypePassword && "pr-11", typeFile && "file:bg-primary file:text-white file:py-[7px] file:px-[10px] file:rounded-[10px] file:mr-[17px] file:cursor-pointer hover:file:opacity-95 cursor-pointer transition-all", "dark:text-white")
   })
-
-  if(type === "range"){
-    return (
-      <input
-        id={id}
-        type={"range"}
-        className="w-full w-[20px] h-[20px] border border-black/20 rounded-[6px] accent-blue-500 bg-white checked:bg-primary disabled:border-gray-350 disabled:bg-gray-200"
-        disabled={disabled || undefined}
-        {...props}
-      />
-    )
-  }
 
   if(type === "color"){
     return (
@@ -192,4 +218,5 @@ function Input({
   )
 }
 
+Input.Range = InputRange;
 export { Input }
