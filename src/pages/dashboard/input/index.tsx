@@ -71,7 +71,7 @@ export default function Index(){
         <Input.Range
           min={0}
           max={50}
-          step={10}
+          step={5}
           onRangeChange={(range) => console.log(range)}
         />
         <Input 

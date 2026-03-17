@@ -31,15 +31,14 @@ export function Toggle({
   }
 
   return (
-    <button
-      type="button" 
+    <div
       onClick={disabled ? undefined : onToggle}
       className={cn("toggle-btn relative w-[40px] h-[24px] border border-black/20 dark:border-dark-border rounded-full bg-white dark:bg-dark-natural-gradient has-[:checked]:bg-primary-gradient transition-all active:scale-[.95]", disabled ? "bg-[#E8E8E8] cursor-not-allowed" : "cursor-pointer")}
     >
       <input
         ref={ref}
         type="checkbox"
-        checked={checked}
+        defaultChecked={checked}
         disabled={disabled || undefined}
         className="peer sr-only"
       />
@@ -47,6 +46,6 @@ export function Toggle({
         ref={toggleRef} 
         className={cn("toggle-btn-pupil w-[16px] h-[16px] bg-[#E1E1E1] border border-black/0 shadow-primary rounded-full absolute peer-checked:toggleOn peer-checked:bg-white", checked ? "toggleOn" : "toggleOff", disabled && "bg-white border-black/20")}
       ></div>
-    </button>
+    </div>
   )
 }

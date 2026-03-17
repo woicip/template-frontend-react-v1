@@ -41,7 +41,7 @@ export default function Sidebar(){
 
         <div className="max-h-[80vh] overflow-auto flex flex-col gap-[30px] custom-scrollbar">
           <div className="flex flex-col gap-[10px]">
-            <div className={cn("w-full sticky top-0 text-very-small font-bold flex flex-col items-start gap-[8px] bg-background dark:bg-background-dark", collapse && "items-center")}>
+            <div className={cn("w-full sticky top-0 text-very-small font-bold flex flex-col items-start gap-[8px] bg-background dark:bg-background-dark z-10", collapse && "items-center")}>
               <p className="text-[#8A94B3]">MENU</p>
               <div className="w-full h-[1px] bg-[#D8DCE9] dark:bg-[#303030]"></div>
             </div>

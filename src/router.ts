@@ -17,6 +17,8 @@ export type Path =
   | `/dashboard/button`
   | `/dashboard/card`
   | `/dashboard/file-upload`
+  | `/dashboard/file-upload/multiple`
+  | `/dashboard/file-upload/single`
   | `/dashboard/free`
   | `/dashboard/input`
   | `/dashboard/modal-overlay`

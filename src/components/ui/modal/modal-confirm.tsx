@@ -1,3 +1,4 @@
+import { LoaderCircleIcon } from "lucide-react";
 import { Button } from "../button/button";
 import { ModalContainer } from "./modal-container";
 import { ModalContent } from "./modal-content";
@@ -8,12 +9,14 @@ type ModalProps = {
   title?: string;
   message?: string;
   btnText?: string;
+  loading?: boolean;
   onClose: () => void;
   onSubmit: () => void;
 }
 
 export function ModalConfirm({
   open,
+  loading = false,
   title = "Confirm",
   message = "Are you sure want to do this action ?",
   btnText = "Yes, Confirm",
@@ -46,9 +49,9 @@ export function ModalConfirm({
             type='button'
             variant={"primary"}
             className='w-full'
-            onClick={onClose}
+            onClick={onSubmit}
           >
-            {btnText}
+            {loading ? <LoaderCircleIcon className="animate-spin" /> : btnText}
           </Button>
         </div>
       </ModalContent>

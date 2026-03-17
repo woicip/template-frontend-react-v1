@@ -1,8 +1,10 @@
 import * as React from "react";
 import { cn } from "@/utils/cn";
-import { EyeIcon } from "lucide-react";
+import { EyeIcon, FileTextIcon, TrashIcon } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { useTheme } from "@/context/theme-context";
+import { InputFileSingleDrop } from "./file-single-drop";
+import { InputMultipleFileDrop } from "./file-multiple-drop";
 
 const input = cva("", {
   variants: {
@@ -99,16 +101,65 @@ function Input({
   }
 
   if(type === "file"){
+    const fileRef = React.useRef(null);
+    const [files, setFiles] = React.useState<FileList | null>(null);
+    
+    const onChangeFile = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+      const files = e.target.files;
+      console.log(files);
+      setFiles(files)
+    }
+
+    const onRemoveFile = () => {
+      setFiles(null);
+      fileRef.current
+    }
+
     return (
-      <label htmlFor={id} className="relative group">
-        <input
-          id={id}
-          type={"file"}
-          className={clsnm}
-          disabled={disabled || undefined}
-          {...props}
-        />
-      </label>
+      <div className="max-w-[350px] w-full relative group">
+        { !files?.length && (
+            <label htmlFor={id} className="w-full h-full absolute cursor-pointer">
+              <input 
+                id={id}
+                ref={fileRef} 
+                type="file" 
+                accept={props.accept} 
+                className="w-full h-full appearance-none sr-only" 
+                onChange={onChangeFile} 
+              />
+            </label>
+          )
+        }
+
+        <div className="w-full p-[10px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px] flex items-center justify-between group-hover:dark:bg-dark-natural-2-gradient transition-all">
+          <div className="flex items-center justify-center gap-4">
+            {
+              files?.length ? (
+                <div className="py-[8px] px-[8px] bg-primary-gradient rounded-[8px] text-white">
+                  <FileTextIcon width={20} height={20} />
+                </div>
+              ) : (
+                <div className="py-[6px] px-[8px] bg-primary-gradient rounded-[8px] text-white">
+                  Browse File
+                </div>
+              )
+            }
+
+            <div>
+              <span>{files?.length ? files[0].name : "No file chosen"}</span>
+            </div>
+          </div>
+
+          { files?.length && (
+              <div className="p-[6px] rounded-[5px] hover:bg-black/2 hover:dark:bg-white/10 cursor-pointer" onClick={onRemoveFile}>
+                <TrashIcon width={20} height={20} className="text-red-500" />
+              </div>
+            )
+          }
+        </div>
+
+        {props.accept ? (<p className="mt-[3px] text-xs text-[#808080] dark:text-dark-gray font-light">Format {props.accept} are allowed (max. 10 MB)</p>) : null}
+      </div>
     )
   }
 
@@ -219,4 +270,7 @@ function Input({
 }
 
 Input.Range = InputRange;
+Input.SingleFileDrop = InputFileSingleDrop;
+Input.MultipleFileDrop = InputMultipleFileDrop;
+
 export { Input }

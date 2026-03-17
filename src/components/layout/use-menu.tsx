@@ -1,4 +1,4 @@
-import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, ChevronUpIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, SparkleIcon, TableIcon, UserIcon } from "lucide-react"
+import { AlertTriangleIcon, ArrowDownIcon, BetweenVerticalEnd, ChevronDownIcon, ChevronUpIcon, CloudUpload, DiffIcon, HomeIcon, Layers2Icon, LayoutGrid, MousePointer, PencilLineIcon, RectangleHorizontal, SparkleIcon, TableIcon, UploadIcon, UserIcon } from "lucide-react"
 import type { MenuIconProps } from "./menu-item"
 import { useLocation } from "react-router"
 import { useCollapse } from "@/context/collapse-context";
@@ -81,6 +81,20 @@ function useMenu(){
       href: "/dashboard/file-upload",
       active: location.pathname === "/dashboard/file-upload",
       icon: <CloudUpload width={18} height={18} />,
+      children: !collapse ? [
+        {
+          name: "Upload Single",
+          href: "/dashboard/file-upload/single",
+          active: location.pathname === "/dashboard/file-upload/single",
+          icon: <UploadIcon width={16} height={16} />,
+        },
+        {
+          name: "Upload Multiple",
+          href: "/dashboard/file-upload/multiple",
+          active: location.pathname === "/dashboard/file-upload/multiple",
+          icon: <UploadIcon width={16} height={16} />,
+        },
+      ] : []
     },
     {
       name: "Tabs",

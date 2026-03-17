@@ -86,7 +86,7 @@ export function MenuItem(props: MenuIconProps){
             className={cn("children-menu overflow-hidden pl-[20px] flex flex-col", open && props.children && "mb-[10px] pb-[10px]")}
           >
             { props.children?.map((child, i) => (
-                <NavLink to={child.href} className={cn("flex items-end relative", (i+1) === props.children?.length && "items-start pb-[8px]")}>
+                <NavLink key={child.href} to={child.href} className={cn("flex items-end relative", (i+1) === props.children?.length && "items-start pb-[8px]")}>
                   <div>
                     {(i+1) === props.children?.length ? <SubMenuLastGlyph /> : <SubMenuContinueGlyph />}
                   </div>
