@@ -59,7 +59,7 @@ export default function Index(){
           {errors.files && <p className="text-small text-red-600">{errors.files.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full">Upload</Button>
+        <Button type="submit" disabled={!form.formState.isValid} variant={form.formState.isValid ? "primary" : "disabled"} className="w-full">Upload</Button>
       </form>
     </div>
   )

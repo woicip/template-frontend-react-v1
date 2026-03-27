@@ -10,23 +10,25 @@ export type Path =
   | `/components/input-components`
   | `/components/modal-components`
   | `/components/select-components`
-  | `/dashboard`
-  | `/dashboard/accordion`
-  | `/dashboard/alert`
-  | `/dashboard/avatar`
-  | `/dashboard/button`
-  | `/dashboard/card`
-  | `/dashboard/file-upload`
-  | `/dashboard/file-upload/multiple`
-  | `/dashboard/file-upload/single`
-  | `/dashboard/free`
-  | `/dashboard/input`
-  | `/dashboard/modal-overlay`
-  | `/dashboard/select`
-  | `/dashboard/stepper`
-  | `/dashboard/table`
-  | `/dashboard/tabs`
-  | `/dashboard/tooltip`
+  | `/dashboard/components`
+  | `/dashboard/components/accordion`
+  | `/dashboard/components/alert`
+  | `/dashboard/components/avatar`
+  | `/dashboard/components/button`
+  | `/dashboard/components/calendar`
+  | `/dashboard/components/card`
+  | `/dashboard/components/file-upload`
+  | `/dashboard/components/file-upload/input`
+  | `/dashboard/components/file-upload/multiple`
+  | `/dashboard/components/file-upload/single`
+  | `/dashboard/components/free`
+  | `/dashboard/components/input`
+  | `/dashboard/components/modal-overlay`
+  | `/dashboard/components/select`
+  | `/dashboard/components/stepper`
+  | `/dashboard/components/table`
+  | `/dashboard/components/tabs`
+  | `/dashboard/components/tooltip`
 
 export type Params = {
   

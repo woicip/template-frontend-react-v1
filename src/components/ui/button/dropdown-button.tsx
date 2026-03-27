@@ -9,8 +9,11 @@ export type DropdownOptionValue = {
 }
 
 export type DropdownButtonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
+  btnClassName?: string;
+  dropdownClassName?: string;
+  render?: (props: { isActive: boolean }) => React.ReactNode;
   options: DropdownOptionValue[];
   onChange: (value: DropdownOptionValue) => void;
 }
@@ -55,20 +58,28 @@ export function DropdownButton(props: DropdownButtonProps){
 
   return (
     <div ref={ref} className={cn("flex flex-col gap-2 relative", props.className)}>
-      <Button 
-        dropdown 
-        mode={open ? 'open' : 'closed'} 
-        variant={"secondary"} 
-        className={cn("w-full focus:shadow-hover")}
-        // onClick={onClickBtn}
-      >
-        {props.children}
-      </Button>
+      {
+        props.render ? (
+          <>
+            {props.render({ isActive: open })}
+          </>
+        ) : (
+          <Button 
+            dropdown 
+            mode={open ? 'open' : 'closed'} 
+            variant={"secondary"} 
+            className={cn("w-full focus:shadow-hover", props.btnClassName)}
+            // onClick={onClickBtn}
+          >
+            {props.children}
+          </Button>
+        )
+      }
 
       { open ? (
           <div 
             ref={dropdownRef} 
-            className="w-full max-h-[250px] origin-top absolute top-[48px] flex flex-col rounded-[8px] border border-black/10 dark:border-dark-border left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar dark:shadow-2xl"
+            className={cn("w-full max-h-[250px] origin-top absolute top-[48px] flex flex-col rounded-[8px] border border-black/10 dark:border-dark-border left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar dark:shadow-2xl z-20", props.dropdownClassName)}
           >
             {
               props.options.map((option) => (

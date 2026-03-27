@@ -71,7 +71,7 @@ export default function Index(){
         />
       </div>
 
-      <Button type="submit" className="w-full">Upload</Button>
+      <Button type="submit" disabled={!form.formState.isValid} variant={form.formState.isValid ? "primary" : "disabled"} className="w-full">Upload</Button>
 
       <ModalConfirm 
         open={modalConfirm}
