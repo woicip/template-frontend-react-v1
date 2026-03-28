@@ -46,11 +46,11 @@ function Button({
   ref,
   ...props
 }: ButtonComponentProps){
-  const clsnm = button({ 
+  const clsnm = button({
     variant,
     disabled,
     size,
-    className: cn(className, dropdown ? "justify-between" : "justify-center")
+    className: cn(dropdown ? "justify-between" : "justify-center", className)
   })
 
   return (

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button/button";
-import useOutsideClick from "@/hooks/use-outside-click";
+import { useContextDropdown } from "@/hooks/use-context-dropdown";
 import { cn } from "@/utils/cn";
-import { useRef, useState } from "react";
 
 export type DropdownOptionValue = {
   label: string;
@@ -19,37 +18,7 @@ export type DropdownButtonProps = {
 }
 
 export function DropdownButton(props: DropdownButtonProps){
-  const [open, setOpen] = useState(false);
-
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const ref = useOutsideClick((isOutside) => {
-    if(isOutside){
-      closeDropdown()
-    } else {
-      openDropdown()
-    }
-  })
-
-  const closeDropdown = () => {
-    dropdownRef.current?.classList.remove("animate-popup")
-    dropdownRef.current?.classList.add("animate-popup-close")
-    const handleClose = () => {
-      setOpen(false);
-      dropdownRef.current?.removeEventListener('animationend', handleClose);
-    }
-    dropdownRef.current?.addEventListener("animationend", handleClose)
-  }
-
-  const openDropdown = () => {
-    setOpen(true);
-    requestAnimationFrame(() => {
-      dropdownRef.current?.classList.add("animate-popup")
-      const handleClose = () => {
-        dropdownRef.current?.removeEventListener('animationend', handleClose);
-      }
-      dropdownRef.current?.addEventListener("animationend", handleClose)
-    })
-  }
+  const { open, ref, subRef: dropdownRef, closeDropdown } = useContextDropdown();
 
   const handleOptionClick = (option: DropdownOptionValue) => {
     props.onChange(option);
