@@ -29,7 +29,7 @@ export default function Tooltip(props: TooltipProps){
               {...getFloatingProps()}
               ref={refs.setFloating} 
               style={floatingStyles}
-              className="w-fit text-center whitespace-nowrap py-[5px] px-[10px] rounded-md bg-natural-gradient text-black shadow-primary dark:bg-dark-natural-2-gradient dark:text-dark-gray border border-black/10 dark:border-white/10"
+              className="w-fit text-center whitespace-nowrap py-[5px] px-[10px] rounded-md bg-natural-gradient text-black shadow-primary dark:bg-dark-natural-2-gradient dark:text-dark-gray border border-black/10 dark:border-white/10 z-20"
             >
               <span>{props.message}</span>
               <FloatingArrow 
