@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import generouted from '@generouted/react-router/plugin'
 import path from 'node:path'
@@ -11,26 +11,21 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
-    }
+    },
   },
   server: {
     host: true,
     port: 5177
   },
-  esbuild: {
-    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : []
-  },
   build: {
+    target: 'baseline-widely-available',
     outDir: 'dist',
     sourcemap: false,
     cssMinify: 'lightningcss',
     cssCodeSplit: true,
     minify: 'esbuild',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-        },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: ({ name }) => {

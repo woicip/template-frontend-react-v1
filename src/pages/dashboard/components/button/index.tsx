@@ -52,7 +52,7 @@ export default function Index(){
             { label: "This Month", value: "this_month" },
             { label: "Last Month", value: "last_month" },
             { label: "This Year", value: "this_year" },
-            { label: "Last Year", value: "last_year" },
+          { label: "Last Year", value: "last_year" },
           ]}
           onChange={(option) => {
             setValue(option);

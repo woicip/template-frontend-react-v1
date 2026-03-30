@@ -10,8 +10,11 @@ const Option = (props: OptionProps<{ value: string; label: string }>) => {
     <div
       ref={props.innerRef}
       className={cn(
-        "w-full py-2.5 px-2.5 rounded-[6px] cursor-pointer dark:text-dark-gray", 
-        props.isSelected ? "bg-primary-gradient text-white hover:bg-primary" : isDark ? "hover:bg-primary-gradient text-white" : "hover:bg-primary-gradient text-text hover:text-white")}
+        "w-full py-2.5 px-2.5 rounded-[6px] cursor-pointer hover:text-white", 
+        props.isSelected ? "bg-primary-gradient text-white hover:bg-primary" : 
+        isDark ? "hover:bg-primary-gradient text-dark-gray" : 
+        "hover:bg-primary-gradient text-text hover:text-white"
+      )}
       {...props.innerProps}
     >
       {props.children}
@@ -51,7 +54,7 @@ export default function RSelect(){
             backgroundColor: isDark ? '#1E1E1E' : 'white',
             padding: '4px',  
             borderRadius: '10px',
-            border: isDark ? '1px solid #your-dark-border-color' : '1px solid #E5E5E5',
+            border: isDark ? '1px solid #303030' : '1px solid #E5E5E5',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.05)',
             top: '5px',
           }),

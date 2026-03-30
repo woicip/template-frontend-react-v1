@@ -1,12 +1,12 @@
-import { DropdownButton, type DropdownOptionValue } from "@/components/ui/button/dropdown-button";
-import useOutsideClick from "@/hooks/use-outside-click";
+import dayjs from "dayjs";
 import { cn } from "@/utils/cn";
-import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { memo, useMemo, useRef, useState, type ButtonHTMLAttributes, type DetailedHTMLProps } from "react";
 import { twMerge } from "tailwind-merge";
 import { Button } from "../button/button";
 import { useContextDropdown } from "@/hooks/use-context-dropdown";
-import dayjs from "dayjs";
+import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useMemo, useState, type ButtonHTMLAttributes, type DetailedHTMLProps } from "react";
+import { DropdownButton, type DropdownOptionValue } from "@/components/ui/button/dropdown-button";
+import { MONTHS } from "@/constants/date";
 
 interface DateItemProps {
   date?: Date;
@@ -15,6 +15,24 @@ interface DateItemProps {
   isSelectedDate?: boolean;
   children?: React.ReactNode;
   onChange?: (date: Date) => void;
+}
+
+interface DatePickerProps {
+  date: Date;
+  format?: string;
+  className?: string;
+    
+  onChange?: (date: Date) => void;
+}
+
+interface MonthPickerProps {
+  month: number;
+  onChangeMonth: (month: DropdownOptionValue) => void;
+}
+
+interface YearPickerProps {
+  year: number;
+  onChangeYear: (value: number) => void;
 }
 
 function DateItem({ 
@@ -27,7 +45,12 @@ function DateItem({
 }: DateItemProps){
   return (
     <div 
-      className={cn("w-[38px] h-[38px] flex items-center justify-center text-[15px] cursor-pointer text-center rounded-lg", isHoliday && "text-[#FF3A3A]", !isCurrentMonth ? "opacity-50 cursor-default hover:bg-black/10 hover:dark:bg-white/10" : `hover:bg-black/10 hover:dark:bg-white/10`, isSelectedDate && "bg-primary-gradient text-white")}
+      className={cn(
+        "w-[38px] h-[38px] flex items-center justify-center text-[15px] cursor-pointer text-center rounded-lg", 
+        isHoliday && "text-[#FF3A3A]", 
+        !isCurrentMonth ? "opacity-50 cursor-default hover:bg-black/10 hover:dark:bg-white/10" : `hover:bg-black/10 hover:dark:bg-white/10`, 
+        isSelectedDate && "bg-primary-gradient text-white"
+      )}
       onClick={() => onChange?.(date as Date)}
     >
       {children}
@@ -35,42 +58,9 @@ function DateItem({
   )
 }
 
-const YearPicker = memo(function (props: {
-  year: number;
-  onChangeYear: (value: number) => void;
-}){
-  const [open, setOpen] = useState(false);
+function YearPicker(props: YearPickerProps){
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
-
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const ref = useOutsideClick((isOutside) => {
-    if(isOutside){
-      closeDropdown()
-    } else {
-      openDropdown()
-    }
-  })
-
-  const closeDropdown = () => {
-    dropdownRef.current?.classList.remove("animate-popup")
-    dropdownRef.current?.classList.add("animate-popup-close")
-    const handleClose = () => {
-      setOpen(false);
-      dropdownRef.current?.removeEventListener('animationend', handleClose);
-    }
-    dropdownRef.current?.addEventListener("animationend", handleClose)
-  }
-
-  const openDropdown = () => {
-    setOpen(true);
-    requestAnimationFrame(() => {
-      dropdownRef.current?.classList.add("animate-popup")
-      const handleClose = () => {
-        dropdownRef.current?.removeEventListener('animationend', handleClose);
-      }
-      dropdownRef.current?.addEventListener("animationend", handleClose)
-    })
-  }
+  const { open, ref, subRef: dropdownRef, openDropdown, closeDropdown } = useContextDropdown();
 
   const ButtonPagination = (props: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => (
     <button 
@@ -146,24 +136,9 @@ const YearPicker = memo(function (props: {
       }
     </div>
   )
-})
+}
 
-const MONTHS = [
-  { label: "January", value: "January"},
-  { label: "February", value: "February"},
-  { label: "March", value: "March" },
-  { label: "April", value: "April" },
-  { label: "May", value: "May" },
-  { label: "June", value: "June" },
-  { label: "July", value: "July" },
-  { label: "August", value: "August" },
-  { label: "September", value: "September" },
-  { label: "October", value: "October" },
-  { label: "November", value: "November" },
-  { label: "December", value: "December" },
-];
-
-function MonthPicker(props: { month: number; onChangeMonth: (month: DropdownOptionValue) => void }){
+function MonthPicker(props: MonthPickerProps){
   const onPrevMonth = () => {
     props.onChangeMonth(MONTHS[props.month - 1 < 0 ? 11 : props.month - 1])
   }
@@ -205,14 +180,6 @@ function MonthPicker(props: { month: number; onChangeMonth: (month: DropdownOpti
   )
 }
 
-interface DatePickerProps {
-  date: Date;
-  format?: string;
-  className?: string;
-    
-  onChange?: (date: Date) => void;
-}
-
 export function DatePicker(props: DatePickerProps){
   const CURR_YEAR = new Date().getFullYear();
   const CURR_MONTH = new Date().getMonth();
@@ -227,8 +194,6 @@ export function DatePicker(props: DatePickerProps){
   ]
 
   const getDaysInMonth = (year: number, month: number) => {
-    console.log('getDaysInMonth year', year);
-    console.log('getDaysInMonth month', month);
     return new Date(year, month + 1, 0).getDate();
   }
 
