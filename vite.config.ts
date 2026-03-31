@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import generouted from '@generouted/react-router/plugin'
 import path from 'node:path'
@@ -18,13 +18,12 @@ export default defineConfig({
     port: 5177
   },
   build: {
-    target: 'baseline-widely-available',
     outDir: 'dist',
     sourcemap: false,
     cssMinify: 'lightningcss',
     cssCodeSplit: true,
     minify: 'esbuild',
-    rolldownOptions: {
+    rollupOptions: {
       output: {
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

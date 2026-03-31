@@ -10,6 +10,10 @@ export type Path =
   | `/components/input-components`
   | `/components/modal-components`
   | `/components/select-components`
+  | `/dashboard/admin`
+  | `/dashboard/admin/dashboard`
+  | `/dashboard/admin/user/account`
+  | `/dashboard/admin/user/roles`
   | `/dashboard/components`
   | `/dashboard/components/accordion`
   | `/dashboard/components/alert`
