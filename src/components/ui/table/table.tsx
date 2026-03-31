@@ -1,8 +1,8 @@
 import './table.css';
 import { cn } from "@/utils/cn";
-import { useState, type DetailedHTMLProps, type HTMLAttributes, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from "react";
 import { DropdownButton, type DropdownOptionValue } from "../button/dropdown-button";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react";
+import { useState, type DetailedHTMLProps, type HTMLAttributes, type ReactNode, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from "react";
 
 export function Table(props: DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>){
   const className = cn("w-full border-collapse overflow-hidden rounded-[10px] bg-natural-gradient dark:bg-dark-natural-gradient", props.className)
@@ -15,51 +15,64 @@ export function Table(props: DetailedHTMLProps<TableHTMLAttributes<HTMLTableElem
   )
 }
 
+function PaginationButton(props: { children?: ReactNode, disabled?: boolean; pageItem?: boolean, active?: boolean }){
+  return (
+    <button
+      type="button"
+      className={cn(
+        "w-[36px] h-[36px] p-[8px] border border-black/10 dark:border-dark-border rounded-[10px] active:scale-[0.95]",
+        props.pageItem ? "flex items-center justify-center bg-transparent border border-black/10 dark:border-white/10 text-white" : "bg-natural-gradient dark:bg-dark-natural-gradient",
+        props.active && "bg-primary-gradient border-0 text-white",
+        !props.disabled && "cursor-pointer"
+      )}
+      disabled={props.disabled}
+    >
+      {props.children}
+    </button>
+  )
+}
+
 function TablePagination(){
   const [limit, setLimit] = useState<DropdownOptionValue>()
   
   return (
     <div className="w-full flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <span>Limit</span>
+        {/* <span>Limit</span> */}
         <DropdownButton
-          className="w-[80px]"
+          className=""
           options={[
             { label: "5", value: "5" },
             { label: "10", value: "10" },
-            { label: "15", value: "15" },
             { label: "20", value: "20" },
+            { label: "50", value: "50" },
           ]}
           onChange={(option) => {
             setLimit(option);
           }}
         >
-          {limit?.label || "10"}
+          {limit?.label || "Row per page"}
         </DropdownButton>
       </div>
 
       <div className="flex items-center gap-2">
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        <PaginationButton>
           <ChevronsLeftIcon width={18} height={18} />
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        </PaginationButton>
+        <PaginationButton>
           <ChevronLeftIcon width={18} height={18} />
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-white dark:text-dark-gray bg-primary-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
-          1
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-black dark:text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
-          2
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] flex items-center justify-center text-black dark:text-dark-gray border border-black/10 dark:border-dark-border rounded-[10px]">
-          3
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        </PaginationButton>
+
+        <PaginationButton pageItem active>1</PaginationButton>
+        <PaginationButton pageItem>2</PaginationButton>
+        <PaginationButton pageItem>3</PaginationButton>
+
+        <PaginationButton>
           <ChevronsRightIcon width={18} height={18} />
-        </button>
-        <button type="button" className="w-[36px] h-[36px] p-[8px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border rounded-[10px]">
+        </PaginationButton>
+        <PaginationButton>
           <ChevronRightIcon width={18} height={18} />
-        </button>
+        </PaginationButton>
       </div>
     </div>
   )
@@ -82,7 +95,7 @@ export function Tr(props: DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>,
 }
 
 export function Th(props: DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>){
-  const className = cn("py-[16px] px-[20px] dark:text-white text-left border-b border-black/10 dark:border-white/10", props.className)
+  const className = cn(props.className, "py-[16px] px-[20px] dark:text-white text-left border-b border-black/10 dark:border-white/10")
   return (
     <th className={className} {...props}>{props.children}</th>
   )
@@ -95,6 +108,6 @@ export function TBody(props: DetailedHTMLProps<HTMLAttributes<HTMLTableSectionEl
 }
 
 export function Td(props: DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>){
-  const className = cn("py-[16px] px-[20px] border-b border-black/10 dark:border-white/10", props.className)
+  const className = cn("py-[11px] px-[20px] border-b border-black/10 dark:border-white/10", props.className)
   return (<td className={className} {...props}>{props.children}</td>)
 }

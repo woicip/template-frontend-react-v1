@@ -2,6 +2,10 @@ table > tbody > tr:hover {
   background-color: rgba(0, 0, 0, .02);
 }
 
+table > tbody > tr:last-child > td {
+  border-bottom: 0px;
+}
+
 @media (prefers-color-scheme: dark) {
   table > tbody > tr:hover {
     background-color: rgba(255, 255, 255, .02);
