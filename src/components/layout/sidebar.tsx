@@ -2,11 +2,10 @@ import { MoonIcon, PanelLeftOpenIcon, PanelRight } from "lucide-react";
 import { Toggle } from "../ui/button/toggle-button";
 import { Profile } from "../ui/sidebar/profile";
 import { useTheme } from "@/context/theme-context";
-import { useMenu } from "./use-menu";
-import { MenuItem } from "./menu-item";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import { useCollapse } from "@/context/collapse-context";
 import { cn } from "@/utils/cn";
+import MenuList from "./menu-list";
 
 export function SidebarToggle(props: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>){
   const {collapse} = useCollapse();
@@ -23,7 +22,6 @@ export function SidebarToggle(props: DetailedHTMLProps<HTMLAttributes<HTMLDivEle
 export default function Sidebar(){
   const { theme, toggleTheme } = useTheme();
   const { collapse, toggleCollapse } = useCollapse();
-  const menu = useMenu();
   const darkMode = theme === "dark";
   const toggleDarkMode = () => toggleTheme();
   
@@ -45,10 +43,7 @@ export default function Sidebar(){
               <p className="text-[#8A94B3]">MENU</p>
               <div className="w-full h-[1px] bg-[#D8DCE9] dark:bg-[#303030]"></div>
             </div>
-
-            <div className={cn("flex flex-col gap-[2px]", collapse && "items-center")}>
-              { menu.map((menu) => <MenuItem key={menu.name} {...menu}/>) }
-            </div>
+            <MenuList />
           </div>
 
           <div className="flex flex-col gap-[10px]">

@@ -1,11 +1,12 @@
 import { BellIcon, SearchIcon } from "lucide-react";
 import { Input } from "../ui/input/input";
-import { useMenu } from "./use-menu";
+// import { useMenu } from "./use-menu";
 import { SidebarToggle } from "./sidebar";
 import { useCollapse } from "@/context/collapse-context";
+import { useMenuAdmin } from "./use-menu-admin";
 
 export function Header(){
-  const menu = useMenu();
+  const menu = useMenuAdmin();
   const activeMenu = menu.find((item) => item.active);
 
   const { collapse, toggleCollapse } = useCollapse();

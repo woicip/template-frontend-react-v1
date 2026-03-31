@@ -22,7 +22,11 @@ export function DashboardContent(props: PropsWithChildren){
 Dashboard.Container = DashboardContainer;
 Dashboard.Content = DashboardContent;
 
-export default function DashboardLayout(props: PropsWithChildren){
+interface DashboardLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function DashboardLayout(props: DashboardLayoutProps){
   return (
     <Dashboard.Container>
       <Sidebar />
