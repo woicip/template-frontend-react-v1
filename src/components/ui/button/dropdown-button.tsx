@@ -51,11 +51,11 @@ export function DropdownButton(props: DropdownButtonProps){
             className={cn("w-full max-h-[250px] origin-top absolute top-[48px] flex flex-col rounded-[8px] border border-black/10 dark:border-dark-border left-0 right-0 bg-natural-gradient dark:bg-dark-natural-gradient shadow-primary transition-all overflow-auto custom-scrollbar dark:shadow-2xl z-20", props.dropdownClassName)}
           >
             {
-              props.options.map((option) => (
+              props.options.map((option, i) => (
                 <button 
                   key={option.value}
                   type="button" 
-                  className="border-b border-black/10 dark:border-dark-border py-[8px] px-[10px] text-regular text-text text-left hover:bg-black/5 cursor-pointer dark:text-dark-gray hover:dark:bg-white/10"
+                  className={cn("border-black/10 dark:border-dark-border py-[8px] px-[10px] text-regular text-text text-left hover:bg-black/5 cursor-pointer dark:text-dark-gray hover:dark:bg-white/10", props.options.length-1 !== i && "border-b")}
                   onClick={handleOptionClick.bind(null, option)}
                 >
                   {option.label}
