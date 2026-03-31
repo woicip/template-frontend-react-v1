@@ -12,7 +12,6 @@ export function CollapseProvider({ children }: { children: ReactNode }) {
 
   const [collapse, setCollapse] = useState(() => {
     const saved = localStorage.getItem(localName);
-    console.log('saved', saved);
     return saved as string;
   });
 
