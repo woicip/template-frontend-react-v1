@@ -6,7 +6,6 @@ export function useContextDropdown(){
 
   const subRef = useRef<HTMLDivElement>(null);
   const ref = useOutsideClick((isOutside) => {
-    console.log(isOutside)
     if(isOutside){
       closeDropdown()
     } else {
