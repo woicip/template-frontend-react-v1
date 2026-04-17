@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "../button/button";
 import { useContextDropdown } from "@/hooks/use-context-dropdown";
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useMemo, useState, type ButtonHTMLAttributes, type DetailedHTMLProps } from "react";
+import { useMemo, useRef, useState, type ButtonHTMLAttributes, type DetailedHTMLProps } from "react";
 import { DropdownButton, type DropdownOptionValue } from "@/components/ui/button/dropdown-button";
 import { MONTHS } from "@/constants/date";
 
@@ -13,16 +13,37 @@ interface DateItemProps {
   isHoliday?: boolean;
   isCurrentMonth?: boolean;
   isSelectedDate?: boolean;
+  isSelectedStart?: boolean;
+  isSelectedEnd?: boolean;
+  startDate?: Date;
+  endDate?: Date;
+  threshold?: Date;
   children?: React.ReactNode;
+  hide?: boolean;
   onChange?: (date: Date) => void;
+  onThresholdChange?: (date: Date) => void;
 }
 
 interface DatePickerProps {
-  date: Date;
+  date?: Date;
   format?: string;
   className?: string;
-    
+  dateRange?: boolean
+  startDate?: Date | undefined;
+  endDate?: Date | undefined;
   onChange?: (date: Date) => void;
+  onRangeChange?: (props: { startDate: Date | undefined, endDate: Date | undefined }) => void;
+}
+
+interface SingleDatePickerProps {
+  date?: Date;
+  format?: string;
+  className?: string;
+  onChange?: (date: Date) => void;
+}
+
+interface DateRangePickerProps extends DatePickerProps {
+  
 }
 
 interface MonthPickerProps {
@@ -35,23 +56,71 @@ interface YearPickerProps {
   onChangeYear: (value: number) => void;
 }
 
+const CURR_YEAR = new Date().getFullYear();
+const CURR_MONTH = new Date().getMonth();
+const DAYS = [
+  { label: "Su", dayOff: true },
+  { label: "Mo", dayOff: false },
+  { label: "Tu", dayOff: false },
+  { label: "We", dayOff: false },
+  { label: "Th", dayOff: false },
+  { label: "Fr", dayOff: false },
+  { label: "Sa", dayOff: true },
+]
+
+const getDaysInMonth = (year: number, month: number) => {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+const getFirstDayOfMonth = (year: number, month: number) => {
+  return new Date(year, month, 1).getDay();
+}
+
+const getCurrentDate = () => {
+  const dt = new Date();
+  dt.setHours(0, 0, 0, 0);
+  return dt;
+}
+
+const getNextDate = () => {
+  const dt = new Date();
+  dt.setHours(0, 0, 0, 0);
+  dt.setMonth(dt.getMonth() + 1);
+  return dt;
+}
+
 function DateItem({ 
   date,
   isHoliday = false, 
   isCurrentMonth = true, 
   isSelectedDate, 
+  isSelectedStart,
+  isSelectedEnd,
+  startDate,
+  endDate,
   children,
-  onChange
+  threshold,
+  hide,
+  onChange,
+  onThresholdChange,
 }: DateItemProps){
+  const ref = useRef<HTMLDivElement>(null);
+  if(hide) return <div></div>
   return (
     <div 
+      ref={ref}
       className={cn(
-        "w-[38px] h-[38px] flex items-center justify-center text-[15px] cursor-pointer text-center rounded-lg", 
-        isHoliday && "text-[#FF3A3A]", 
-        !isCurrentMonth ? "opacity-50 cursor-default hover:bg-black/10 hover:dark:bg-white/10" : `hover:bg-black/10 hover:dark:bg-white/10`, 
-        isSelectedDate && "bg-primary-gradient text-white"
+        "w-[38px] h-[38px] flex items-center justify-center text-[15px] cursor-pointer text-center rounded-lg",
+        isHoliday && "text-[#FF3A3A]",
+        !isCurrentMonth ? "opacity-50 cursor-default hover:bg-black/10 hover:dark:bg-white/10" : `hover:bg-black/10 hover:dark:bg-white/10`,
+        isSelectedDate && "bg-primary-gradient text-white",
+        isSelectedStart && "bg-primary-gradient text-white",
+        isSelectedEnd && "bg-primary-gradient text-white",
+        date! > startDate! && date! < threshold! && !endDate && "bg-primary/10 dark:bg-primary/15",
+        date! > startDate! && date! < endDate! && "bg-primary/10 dark:bg-primary/15",
       )}
       onClick={() => onChange?.(date as Date)}
+      onMouseOver={() => onThresholdChange?.(date as Date)}
     >
       {children}
     </div>
@@ -180,46 +249,7 @@ function MonthPicker(props: MonthPickerProps){
   )
 }
 
-export function DatePicker(props: DatePickerProps){
-  const CURR_YEAR = new Date().getFullYear();
-  const CURR_MONTH = new Date().getMonth();
-  const DAYS = [
-    { label: "Su", dayOff: true },
-    { label: "Mo", dayOff: false },
-    { label: "Tu", dayOff: false },
-    { label: "We", dayOff: false },
-    { label: "Th", dayOff: false },
-    { label: "Fr", dayOff: false },
-    { label: "Sa", dayOff: true },
-  ]
-
-  const getDaysInMonth = (year: number, month: number) => {
-    return new Date(year, month + 1, 0).getDate();
-  }
-
-  const getFirstDayOfMonth = (year: number, month: number) => {
-    return new Date(year, month, 1).getDay();
-  }
-
-  const [month, setMonth] = useState<number>(CURR_MONTH);
-  const [year, setYear] = useState<number>(CURR_YEAR);
-  const [totalDays, setTotalDays] = useState<number>(31);
-
-  const dt = props.date
-  dt.setHours(0, 0, 0, 0);
-  const [selectedDate, setSelecteDate] = useState(dt);
-
-  const onChangeMonth = (month: DropdownOptionValue) => {
-    const MONTH = MONTHS.findIndex((item) => item.value === month.value);
-    setMonth(MONTH);
-    setTotalDays(getDaysInMonth(year, MONTH));
-  }
-
-  const onChangeYear = (year: number) => {
-    setYear(year);
-    setTotalDays(getDaysInMonth(year, month));
-  }
-
+function useCalendarCells(year: number, month: number){
   const getBeforeDates = useMemo(() => {
     const firstDay = getFirstDayOfMonth(year, month);
     const daysInPrevMonth = new Date(year, month, 0).getDate();
@@ -235,9 +265,16 @@ export function DatePicker(props: DatePickerProps){
   }, [year, month])
 
   const dates = useMemo(() => {
-    const dates = Array(totalDays).fill(undefined).map((_, i) => ({ isCurrentMonth: true, isHoliday: false, date: new Date(year, month, (i+1)) }))
+    const totalDays = getDaysInMonth(year, month)
+    const dates = Array(totalDays)
+      .fill(undefined)
+      .map((_, i) => ({
+        isCurrentMonth: true,
+        isHoliday: false,
+        date: new Date(year, month, (i+1))
+      }))
     return dates
-  }, [totalDays, month, year])
+  }, [month, year])
 
   const getNextDates = useMemo(() => {
     const firstDay = getFirstDayOfMonth(year, month);
@@ -256,10 +293,34 @@ export function DatePicker(props: DatePickerProps){
 
     return cells;
   }, [dates, month, year]);
-  
+
   const cells = useMemo(() => {
     return [...getBeforeDates, ...dates, ...getNextDates]
   }, [getBeforeDates, dates, getNextDates])
+
+  return {
+    cells,
+  }
+}
+
+function SingleDatePicker(props: SingleDatePickerProps){
+  const [month, setMonth] = useState<number>(CURR_MONTH);
+  const [year, setYear] = useState<number>(CURR_YEAR);
+
+  const dt = props.date
+  dt?.setHours(0, 0, 0, 0);
+  const [selectedDate, setSelecteDate] = useState(dt);
+
+  const { cells } = useCalendarCells(year, month);
+
+  const onChangeMonth = (month: DropdownOptionValue) => {
+    const MONTH = MONTHS.findIndex((item) => item.value === month.value);
+    setMonth(MONTH);
+  }
+
+  const onChangeYear = (year: number) => {
+    setYear(year);
+  }
 
   const onChange = (date: Date) => {
     setSelecteDate(date)
@@ -269,7 +330,7 @@ export function DatePicker(props: DatePickerProps){
 
   return (
     <div ref={ref} className={cn("w-[280px] flex flex-col gap-2 relative", props.className)}>
-      <Button type="button" variant={"secondary"} className="w-full flex items-start justify-start">
+      <Button type="button" variant={"secondary"} className="w-full flex items-start justify-start rounded-xl">
         <div className="w-full flex items-center justify-end gap-2">
           <CalendarIcon width={18} height={18} />
           <span>
@@ -279,7 +340,7 @@ export function DatePicker(props: DatePickerProps){
       </Button>
 
       { open ? (
-          <div ref={subRef} className="w-[280px] rounded-[10px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border shadow-primary origin-top-left">
+          <div ref={subRef} className="w-[280px] rounded-[10px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border shadow-primary origin-top-left absolute top-[45px] z-10">
             <div className="pt-[10px] px-[10px] border-b border-black/10 dark:border-dark-border">
               <div className="flex items-center justify-between relative">
                 <MonthPicker month={month} onChangeMonth={onChangeMonth} />
@@ -301,9 +362,9 @@ export function DatePicker(props: DatePickerProps){
                   <DateItem 
                     key={item.date.getTime()}
                     date={item.date}
-                    isHoliday={item.date.getDay() === 0 || item.date.getDay() === 6}
                     isCurrentMonth={item.isCurrentMonth}
-                    isSelectedDate={item.date.getTime() === selectedDate.getTime()}
+                    isHoliday={item.date.getDay() === 0 || item.date.getDay() === 6}
+                    isSelectedDate={item.date.getTime() === selectedDate?.getTime()}
                     onChange={onChange}
                   >
                     {item.date.getDate()}
@@ -316,4 +377,206 @@ export function DatePicker(props: DatePickerProps){
       }
     </div>
   )
+}
+
+function DateRangePicker(props: DateRangePickerProps){
+  const { open, ref, subRef } = useContextDropdown();
+
+  const [firstMonth, setFirstMonth] = useState<Date>(getCurrentDate());
+  const [secondMonth, setSecondMonth] = useState<Date>(getNextDate());
+
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | undefined>(undefined);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | undefined>(undefined);
+  const [threshold, setThreshold] = useState<Date|undefined>(undefined);
+
+  const { cells: startCells } = useCalendarCells(firstMonth?.getFullYear(), firstMonth?.getMonth());
+  const { cells: endCells } = useCalendarCells(secondMonth?.getFullYear(), secondMonth?.getMonth());
+
+  const onThresholdChange = (date: Date) => {
+    setThreshold(date);
+  }
+
+  const onChangeStart = (date: Date) => {
+    setSelectedStartDate(date);
+  }
+
+  const onChangeEnd = (date: Date | undefined) => {
+    if(!date) setSelectedEndDate(undefined);
+    if(date! < selectedStartDate!){
+      setSelectedStartDate(date);
+      setSelectedEndDate(undefined);
+      return;
+    }
+    setSelectedEndDate(date);
+  }
+
+  const onChange = (date: Date) => {
+    if(!selectedStartDate && !selectedEndDate){
+      onChangeStart(date);
+      return
+    }
+
+    if(selectedStartDate && !selectedEndDate){
+      onChangeEnd(date)
+      return
+    }
+
+    if(!!selectedStartDate && !!selectedEndDate){
+      onChangeStart(date);
+      onChangeEnd(undefined);
+      return
+    }
+  }
+
+  const onPrevMonth = () => {
+    const dtFirst = new Date(firstMonth);
+    dtFirst.setMonth(dtFirst.getMonth() - 1);
+    setFirstMonth(dtFirst);
+
+    const dtSecond = new Date(secondMonth);
+    dtSecond.setMonth(dtSecond.getMonth() - 1);
+    setSecondMonth(dtSecond);
+  }
+
+  const onNextMonth = () => {
+    const dtFirst = new Date(firstMonth);
+    dtFirst.setMonth(dtFirst.getMonth() + 1);
+    setFirstMonth(dtFirst);
+
+    const dtSecond = new Date(secondMonth);
+    dtSecond.setMonth(dtSecond.getMonth() + 1);
+    setSecondMonth(dtSecond);
+  }
+
+  return (
+    <div ref={ref} className={cn("w-fit flex flex-col gap-2 relative", props.className)}>
+      <Button type="button" variant={"secondary"} className="w-fit flex items-center justify-between relative">
+        <div className="w-full flex items-center justify-end gap-2">
+          <CalendarIcon width={18} height={18} />
+          <div className="whitespace-nowrap">
+            {selectedStartDate ? dayjs(selectedStartDate).format(props.format || 'DD MMM YYYY') : 'Select Date'}
+          </div>
+        </div>
+
+        <div className="w-fit mx-2 dark:text-white/50">-</div>
+
+        <div className="w-full flex items-center justify-end gap-2">
+          <CalendarIcon width={18} height={18} />
+          <div className="whitespace-nowrap">
+            {selectedEndDate ? dayjs(selectedEndDate).format(props.format || 'DD MMM YYYY') : 'Select Date'}
+          </div>
+        </div>
+      </Button>
+
+      {
+        open && (
+          <div ref={subRef} className="w-[600px] rounded-[10px] bg-natural-gradient dark:bg-dark-natural-gradient border border-black/10 dark:border-dark-border shadow-primary origin-top-left absolute top-[46px]">
+            <div className="flex items-start">
+              <div>
+                <div className="py-[10px] pb-[0px] px-[20px] flex items-center justify-between">
+                  <button 
+                    type="button" 
+                    className="p-[6px] cursor-pointer border border-transparent hover:border-black/10 dark:hover:border-white/10 rounded-[8px] transition-all hover:bg-black/5 hover:dark:bg-white/5" 
+                    onClick={onPrevMonth}
+                  >
+                    <ChevronLeftIcon width={20} height={20} />
+                  </button>
+                  <p>{MONTHS[firstMonth?.getMonth()!]?.label} {firstMonth?.getFullYear()!}</p>
+                  <div  className="pl-[30px]"></div>
+                </div>
+                
+                <div className="px-[10px] border-b border-black/10 dark:border-dark-border">
+                  <div className="grid grid-cols-7 gap-0">
+                    {
+                      DAYS.map((d) => (
+                        <div key={d.label} className={twMerge("w-full p-[10px] text-[13.3px]", d.dayOff ? "text-red-600" : "")}>{d.label}</div>
+                      ))
+                    }
+                  </div>
+                </div>
+
+                <div className="p-[10px] grid grid-cols-7 gap-0">
+                  {
+                    startCells.map((item) => (
+                      <DateItem 
+                        key={item.date.getTime()}
+                        date={item.date}
+                        hide={!item.isCurrentMonth}
+                        isCurrentMonth={item.isCurrentMonth}
+                        isHoliday={item.date.getDay() === 0 || item.date.getDay() === 6}
+                        isSelectedStart={selectedStartDate?.getTime() === item.date.getTime()}
+                        isSelectedEnd={selectedEndDate?.getTime() === item.date.getTime()}
+                        startDate={selectedStartDate}
+                        endDate={selectedEndDate}
+                        threshold={threshold}
+                        onChange={onChange}
+                        onThresholdChange={onThresholdChange}
+                      >
+                        {item.date.getDate()}
+                      </DateItem>
+                    ))
+                  }
+                </div>
+              </div>
+
+              <div>
+                <div className="py-[10px] pb-[0px] px-[20px] flex items-center justify-between">
+                  <div  className="pl-[30px]"></div>
+                  <p>{MONTHS[secondMonth?.getMonth()!]?.label} {secondMonth?.getFullYear()!}</p>
+                  <button 
+                    type="button" 
+                    className="p-[6px] cursor-pointer border border-transparent hover:border-black/10 dark:hover:border-white/10 rounded-[8px] transition-all hover:bg-black/5 hover:dark:bg-white/5"
+                    onClick={onNextMonth}
+                  >
+                    <ChevronRightIcon width={20} height={20} />
+                  </button>
+                </div>
+
+                <div className="px-[10px] border-b border-black/10 dark:border-dark-border">
+                  <div className="grid grid-cols-7 gap-0">
+                    {
+                      DAYS.map((d) => (
+                        <div key={d.label} className={twMerge("w-full p-[10px] text-[13.3px]", d.dayOff ? "text-red-600" : "")}>{d.label}</div>
+                      ))
+                    }
+                  </div>
+                </div>
+
+                <div className="p-[10px] grid grid-cols-7 gap-0">
+                  {
+                    endCells.map((item) => (
+                      <DateItem 
+                        key={item.date.getTime()}
+                        date={item.date}
+                        hide={!item.isCurrentMonth}
+                        isCurrentMonth={item.isCurrentMonth}
+                        isHoliday={item.date.getDay() === 0 || item.date.getDay() === 6}
+                        isSelectedStart={selectedStartDate?.getTime() === item.date.getTime()}
+                        isSelectedEnd={selectedEndDate?.getTime() === item.date.getTime()}
+                        startDate={selectedStartDate}
+                        endDate={selectedEndDate}
+                        threshold={threshold}
+                        onChange={onChange}
+                        onThresholdChange={onThresholdChange}
+                      >
+                        {item.date.getDate()}
+                      </DateItem>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  )
+}
+
+export function DatePicker({ dateRange, ...props }: DatePickerProps){
+  if(dateRange){
+    return <DateRangePicker {...props} />
+  } else {
+    return <SingleDatePicker {...props} />
+  }
 }
